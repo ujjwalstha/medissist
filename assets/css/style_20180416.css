@@ -1,0 +1,27 @@
+
+.error {
+  color: red !important;
+  font-size: 14px;
+  font-weight: none;
+}
+#login-form .error {
+  color: maroon !important;
+  font-size: 14px;
+  font-weight: none;
+}
+.red {
+	color: #d90400;
+}
+
+.blue {
+	color: #053f88;
+}
+
+.green {
+	color: #00af50;
+}
+
+.asterisk {
+	font-size: 17px;
+}
+

@@ -1,0 +1,126 @@
+
+.error {
+  color: red !important;
+  font-size: 14px;
+  font-weight: none;
+}
+
+.red {
+	color: #d90400;
+}
+
+.blue {
+	color: #053f88;
+}
+
+.green {
+	color: #00af50;
+}
+
+.asterisk {
+	
+}
+
+
+/*PRIVATE MESSAGE*/
+.chat
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.chat li
+{
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted #B3A9A9;
+}
+
+.chat li.left .chat-body
+{
+    margin-left: 60px;
+}
+
+.chat li.right .chat-body
+{
+    margin-right: 60px;
+}
+
+
+.chat li .chat-body p
+{
+    margin: 0;
+    color: #777777;
+}
+
+.panel .slidedown .glyphicon, .chat .glyphicon
+{
+    margin-right: 5px;
+}
+
+.panel-body .private-message
+{
+    overflow-y: scroll;
+    height: 250px;
+}
+
+.sent-time {
+    font-size: 12px;
+}
+
+.message-display {
+    font-size: 14px;
+   width: 93%;
+}
+
+
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar
+{
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+}
+/*PRIVATE MESSAGE ENDS HERE*/
+
+
+
+
+/** Animation CSS for MESSAGE RECEIVED section starts here **/
+.message-received {
+  /*width: 0px;*/
+  
+  -webkit-animation: MESSAGE 1s infinite;  /* Safari 4+ */
+  -moz-animation: MESSAGE 1s infinite;  /* Fx 5+ */
+  -o-animation: MESSAGE 1s infinite;  /* Opera 12+ */
+  animation: MESSAGE 1s infinite;  /* IE 10+, Fx 29+ */
+}
+
+  
+
+@-webkit-keyframes MESSAGE {
+  0%, 49% {
+  
+    transition: 1s;
+    /*border: 3px solid #e50000;*/
+    color: #dc3545;
+  }
+  50%, 100% {
+    transition: 1s;
+    /*border: 3px solid rgb(117, 209, 63);*/
+    color: #d8828b;
+  } 
+}
+/** Animation CSS for MESSAGE RECEIVED section ends here **/
+

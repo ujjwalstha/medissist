@@ -1,0 +1,135 @@
+body{
+    font-family: 'Open Sans', sans-serif;
+}
+.logo i {
+	font-size: 31px;
+	margin-right: 4px;
+	word-spacing: 14px;
+}
+.logo{
+	color: white;
+	margin: 0;
+	font-size: 30px;
+	padding: 4px 0;
+	padding-bottom: 15px;
+	font-weight: bold;
+
+}
+
+.login-bottom-text{
+	margin-top: 0px;
+	margin-bottom: 0px;
+	font-size: 12px;
+	color: white;
+	line-height: 19px;
+}
+
+header{
+	background-color: #d8828b;
+	padding-top: 20px;
+}
+header .form-group{
+	margin-bottom: 0px;
+}
+header .btn-header-login{
+	margin-bottom: 15px;	
+}
+.login-main{
+	margin-top: 130px;
+}
+.multibox{
+	padding-left: 0px;
+	padding-bottom: 10px;
+}
+.login-main span{
+	font-size: 12px;
+
+} 
+
+
+article  {
+	background-image: url('../images/defaulthome-bg.png');
+	background-repeat: no-repeat;
+	background-repeat: no-repeat;
+	background-attachment: fixed; /*scroll*/
+	background-position: center center;
+	background-size: cover;	
+	/*opacity: 0.3;*/
+	height: 100%;
+	width: 100%;
+}
+
+
+
+footer hr{
+	margin-top: 0px;
+	padding-top: 0px;
+}
+.footer-options ul{
+	clear: both;
+	padding: 0px;
+	margin: 0px;
+}
+.footer-options ul li{
+	float:left;
+	list-style: none;
+	padding: 5px;
+	font-size: 12px;
+}
+.footer-options ul li a{
+	text-decoration: none;
+	color: #000;
+}
+.copyrights{
+	margin-top: 25px;
+}
+
+a.forgot-password{
+	color: white;
+	transition: 1s;
+	text-decoration: none;
+}
+
+a.forgot-password:hover{
+	color: maroon;
+	transition: 1s;
+}
+
+
+.modal-header {
+	background-color: #c4e8ee;
+}
+
+.error {
+  color: red !important;
+  font-size: 14px;
+  font-weight: none;
+}
+
+/*#login-form .error {
+  color: maroon !important;
+  font-size: 14px;
+  font-weight: none;
+}*/
+
+.red {
+    color: #d90400;
+}
+
+.blue {
+    color: #053f88;
+}
+
+.green {
+    color: #00af50;
+}
+
+.asterisk {
+    font-size: 17px;
+}
+
+#login-form .error {
+  color: maroon !important;
+  font-size: 14px;
+  font-weight: none;
+}
