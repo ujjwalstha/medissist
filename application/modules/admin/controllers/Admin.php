@@ -640,6 +640,7 @@ class Admin extends MX_Controller {
 	                            NAME VARCHAR(100) NOT NULL,
 	                            USER_TYPE VARCHAR(30) NOT NULL,
 	                            MESSAGE TEXT NOT NULL,
+	                            SEEN_STATUS INT(2) DEFAULT 0, 
 	                            CREATED TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 	                            )";
 
@@ -651,6 +652,11 @@ class Admin extends MX_Controller {
 
 			// self::$viewData['getForumAnswers'] = $this->admin_model->getForumAnswers();
 			self::$viewData['getPrivateMessage'] = $this->admin_model->getPrivateMessage($userid);
+
+			if (self::$viewData['getPrivateMessage']) {
+				self::$viewData['updateSeenStatus'] = $this->admin_model->updateSeenStatus($table, $userid);
+			}
+
 			self::$viewData['getUserById'] = $this->admin_model->getUserById($userid);
 			self::$viewData['page'] = "admin/privatemessage";
 			$this->load->view(TEMPADMIN, self::$viewData);

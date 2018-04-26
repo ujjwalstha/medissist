@@ -146,9 +146,16 @@
 					<ul class="treeview-menu">
 						<?php foreach($getusers as $users): ?>
 							<li><a href="<?php echo base_url().'admin/privatemessage/'.$users->ID ?>"><i class="fa fa-user <?php echo ($users->GENDER == 'male') ? 'text-blue' : 'text-red' ?>"></i><?php echo $users->FIRSTNAME.' '.$users->LASTNAME; ?>
+
+								<?php
+									// $userid = $users->ID;
+									// echo $this->admin_model->checkSeenStatus($userid);
+								?>
+
 								<span class="pull-right-container">
-									<i class="fa fa-envelope pull-right text-red message-received"></i>
-								</span>
+					                <i class="fa fa-envelope pull-right text-red message-received"></i>
+					            </span>				
+
 							</a></li>
 						<?php endforeach; ?>
 					</ul>

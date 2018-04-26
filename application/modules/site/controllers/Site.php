@@ -362,6 +362,7 @@ class Site extends MX_Controller {
 	                            NAME VARCHAR(100) NOT NULL,
 	                            USER_TYPE VARCHAR(30) NOT NULL,
 	                            MESSAGE TEXT NOT NULL,
+	                            SEEN_STATUS INT(2) DEFAULT 0, 
 	                            CREATED TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 	                            )";
 

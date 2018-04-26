@@ -1,3 +1,5 @@
+
+
 <!-- /.content-wrapper -->
 <footer class="main-footer" >
 	<div class="pull-right hidden-xs">
@@ -78,6 +80,10 @@
    
    <script src="<?php echo base_url().'assets/datatables/DataTables-1.10.16/js/jquery.dataTables.min.js' ?>"></script>
    <script src="<?php echo base_url().'assets/datatables/DataTables-1.10.16/js/dataTables.bootstrap.min.js' ?>"></script>
+
+
+
+
 
  
 </body>

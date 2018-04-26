@@ -108,6 +108,7 @@
 
 						</div>
 						<hr style="margin-bottom: 70px;">
+						<hr>
 
 						
 						<?php  
@@ -187,7 +188,7 @@
 							<div class="col-md-11">
 								<div class="form-group">
 									<label></label>
-									<input type="text" class="form-control" id="answer" name="answer" placeholder="Write your opinion here..." required>
+									<input type="text" class="form-control" id="answer" name="answer" placeholder="Write your comment here..." required>
 									<input type="hidden" value="<?php echo $question->QUESTION_ID ?>" name="question_id" id="question_id">
 
 								</div>
@@ -196,7 +197,7 @@
 							<div class="col-md-1">
 								<div class="form-group">
 									<label></label>
-									<button type="submit" class="btn btn-info" name="addans-btn" id="addans-btn" style="margin-top: 23px">POST</button>
+									<button type="submit" class="btn btn-info" name="addans-btn" id="addans-btn" >Comment</button>
 								</div>
 							</div>
 
@@ -206,7 +207,8 @@
 
 						</div>
 
-						<hr class="hr-line-forum" style="height: 2px; background-color: #bce8f1">
+						<hr class="hr-line-forum" style="height: 5px; background-color: #bce8f1">
+
 						<?php endforeach; ?>
 					</div>
 				</div>

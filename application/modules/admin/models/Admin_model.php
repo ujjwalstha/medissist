@@ -301,6 +301,18 @@ class Admin_model extends CI_Model {
     }
 
 
+    public function updateSeenStatus($table, $userid)
+    {
+        $data = array(
+            'SEEN_STATUS' => 1
+        );
+
+        $where = array('USER_TYPE' => 'user');
+        $this->db->where($where);
+        return $this->db->update($table, $data);
+    }
+
+
     public function getUserById($userid)
     {
         $where = array('ID' => $userid);
@@ -333,6 +345,30 @@ class Admin_model extends CI_Model {
 
         return $this->db->insert($table, $data);
     }
+
+
+    public function checkSeenStatus($userid)
+    {
+
+        $specialistid = $this->session->userdata('adminid');
+        $table = "tbl_pvt_msg_".$userid."_".$specialistid;
+
+        $where = array('USER_TYPE' => 'user', 'SEEN_STATUS' => 0);
+        $this->db->order_by('CREATED', 'DESC');
+        $this->db->limit(1);
+        $result = $this->db->get_where($table, $where);
+
+        if($result->num_rows() > 0) { 
+         
+            echo '<span class="pull-right-container">
+                <i class="fa fa-envelope pull-right text-red message-received"></i>
+            </span>';
+        }
+                             
+
+    }
+
+
 
 
 }
