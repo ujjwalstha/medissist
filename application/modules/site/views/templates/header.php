@@ -3,15 +3,13 @@
 <div class="main-header" id="house">
 	<div class="header-strip">
 		<div class="container">
-			<p class="location"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <a href="mailto:info@example.com">info@example.com</a></p>
-			<p class="phonenum"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> + 655 8858 54892</p>
-			<div class="social-icons">
-				<ul>					
-					<li><a href="#"><i class="facebook"> </i></a></li>
-					<li><a href="#"><i class="twitter"> </i></a></li>
-					<li><a href="#"><i class="google-plus"> </i></a></li>										
-				</ul>
-			</div>
+			<p class="location"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <a href="mailto:info@example.com">info.medissist@gmail.com</a></p>
+			<p class="phonenum"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> + 977 9841 ******</p>
+
+			<a href="<?php echo base_url().'logout' ?>"><p class="phonenum pull-right"><span class="fa fa-sign-out" aria-hidden="true"></span> Logout</p></a>
+			<a href="#"><p class="phonenum pull-right"><span class="fa fa-user" aria-hidden="true"></span> <?php echo $this->session->userdata('welcome'); ?></p></a>
+			
+			
 
 			<div class="clearfix"></div>
 		</div>
@@ -63,7 +61,11 @@
 					<div class="top-menu">
 						<nav class="menu menu--francisco">
 							<ul class="nav navbar-nav menu__list">
-								<li class="menu__item menu__item--current"><a href="<?php echo base_url().'medicines' ?>" class="menu__link"><span class="menu__helper">Medicines</span></a></li>
+								<!-- <li class="menu__item menu__item--current"><a href="<?php //echo base_url().'medicines' ?>" class="menu__link"><span class="menu__helper">Medicines</span></a></li> -->
+
+								<li class="menu__item"><a href="<?php echo base_url().'home' ?>" class="menu__link"><span class="menu__helper"><i class="fa fa-home"></i></span></a></li>
+
+								<li class="menu__item"><a href="<?php echo base_url().'medicines' ?>" class="menu__link"><span class="menu__helper">Medicines</span></a></li>
 
 								<li class="menu__item"><a href="<?php echo base_url().'healthspecialist' ?>" class="menu__link"><span class="menu__helper">Health Specialists</span></a></li>
 
@@ -73,7 +75,7 @@
 
 								<li class="menu__item"><a href="<?php echo base_url().'contact' ?>" class="menu__link"><span class="menu__helper">Contact Us</span></a></li>
 
-								<li class="menu__item"><a href="<?php echo base_url().'logout' ?>" class="menu__link"><span class="menu__helper"><i class="fa fa-sign-out"></i> Logout</span></a></li>
+								<!-- <li class="menu__item"><a href="<?php //echo base_url().'logout' ?>" class="menu__link"><span class="menu__helper"><i class="fa fa-sign-out"></i> Logout</span></a></li> -->
 							</ul>
 						</nav>
 					</div>

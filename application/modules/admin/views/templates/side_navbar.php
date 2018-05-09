@@ -70,7 +70,20 @@
 
 				<li><a href="<?php echo base_url().'admin/adminpanel' ?>"><i class="fa fa-cloud"></i> <span>Dashboard</span></a></li>
 
-				<li><a href="<?php echo base_url().'admin/managespecialist' ?>"><i class="fa fa-user-md text-red"></i> <span>Manage Specialist</span></a></li>
+				
+
+				<li class="treeview">
+					<a href="#">
+						<i class="fa fa-user-md text-red"></i> <span>Health Specialist</span>
+						<span class="pull-right-container">
+							<i class="fa fa-angle-left pull-right"></i>
+						</span>
+					</a>
+					<ul class="treeview-menu">
+						<li><a href="<?php echo base_url().'admin/managespecialist' ?>"><i class="fa fa-user-md text-green"></i> <span>Manage Specialist</span></a></li>
+						<li><a href="<?php echo base_url().'admin/managespecialisttype' ?>"><i class="fa fa-plus text-yellow"></i> Manage Specialist Type</a></li>
+					</ul>
+				</li>
 
 				<li><a href="<?php echo base_url().'admin/manageuser' ?>"><i class="fa fa-user text-blue"></i> <span>Manage Users</span></a></li>
 

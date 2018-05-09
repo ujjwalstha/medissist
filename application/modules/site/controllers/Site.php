@@ -23,8 +23,10 @@ class Site extends MX_Controller {
 		$this->load->library($library);
 
 		$this->load->model('site_model'); 
+		$this->load->model('admin/admin_model'); 
 
 		self::$viewData['user_detail'] = $this->site_model->getUserDetail();
+		self::$viewData['getspecialisttype'] = $this->admin_model->getSpecialistType();
 
 	}
 
@@ -420,5 +422,77 @@ class Site extends MX_Controller {
 		else:   
             redirect(base_url());    
         endif;
+    }
+
+
+    public function searchspecialist()
+    {
+    	if ($this->input->is_ajax_request()) {
+
+    		try {
+    			$search = $this->input->post('search');
+    			// echo $search;exit;
+    			$data['getspecialist'] = $getspecialist = $this->site_model->getSearchSpecialist($search);
+    			// $data['eventCount'] = count($getEvents);
+
+    			//var_dump($data['eventCount']);exit;
+    			$view = $this->load->view('site/healthspecialistcontent', $data, TRUE);
+
+    			// var_dump($view);exit;
+
+    			$response = array(
+    				'status' => 'success',
+    				'data'	 =>	$view
+    			);
+
+    		} catch (Exception $e) {
+    			$response = array(
+    				'status' 	=> 'error',
+    				'message'	=> $e->getMessage()	
+    			);
+    		} 
+
+    		header("Content-Type: application/json");
+    		echo json_encode($response);
+
+    	} else {
+    		exit("No direct script allowed");
+    	}
+    }
+
+
+    public function sortspecialist()
+    {
+    	if ($this->input->is_ajax_request()) {
+
+    		try {
+    			$specialisttype = $this->input->post('specialisttype');
+    			// echo $specialisttype; exit;
+    			$data['getspecialist'] = $getspecialist = $this->site_model->getSortspecialist($specialisttype);
+    			// $data['eventCount'] = count($getEvents);
+
+    			//var_dump($data['eventCount']);exit;
+    			$view = $this->load->view('site/healthspecialistcontent', $data, TRUE);
+
+    			// var_dump($view);exit;
+
+    			$response = array(
+    				'status' => 'success',
+    				'data'	 =>	$view
+    			);
+
+    		} catch (Exception $e) {
+    			$response = array(
+    				'status' 	=> 'error',
+    				'message'	=> $e->getMessage()	
+    			);
+    		} 
+
+    		header("Content-Type: application/json");
+    		echo json_encode($response);
+
+    	} else {
+    		exit("No direct script allowed");
+    	}
     }
 }

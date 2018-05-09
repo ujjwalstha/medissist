@@ -23,9 +23,12 @@ class Admin extends MX_Controller {
 		$this->load->library($library);
 
 		$this->load->model('admin_model'); 
+		$this->load->model('site/site_model'); 
 
 		self::$viewData['admin_details'] = $this->admin_model->getAdminDetails();
 		self::$viewData['getusers'] = $this->admin_model->getusers();
+		self::$viewData['getspecialisttype'] = $this->admin_model->getSpecialistType();
+
 		// print_r(self::$viewData['admin_details']);
 
 	}
@@ -47,12 +50,12 @@ class Admin extends MX_Controller {
 				$admintype = $this->input->post('admintype');
 
 		        // echo $admintype;exit;
-		        if ($admintype == 0) {
-		        	$message = 'Please select the type you want to login as.';
+				if ($admintype == 0) {
+					$message = 'Please select the type you want to login as.';
 					$this->session->set_flashdata('login_fail', $message);
 					redirect('admin/login');
 
-		        } else {
+				} else {
 
 					$checkDashboardLogin = $this->admin_model->checkDashboardLogin($username, $password, $admintype);
 
@@ -303,8 +306,8 @@ class Admin extends MX_Controller {
 			$uri = $this->input->post('uri');
 
 			if ($uri == 'privatemessage') {
-			$uri_id = $this->input->post('uri_id');
-		}
+				$uri_id = $this->input->post('uri_id');
+			}
 
 	        $online = $this->input->post('online'); //to activate user
 	        if (isset($online)) {
@@ -333,6 +336,124 @@ class Admin extends MX_Controller {
 	    } else {
 	    	redirect('admin/login');    
 	    }
+	}
+
+
+	public function managespecialisttype()
+	{
+		if($this->session->userdata('adminid') != ''):
+
+			self::$viewData['full_title'] = "Admin | Manage Specialist Type";
+			self::$viewData['breadcrumb'] = "Manage Specialist Type"; 
+
+			self::$viewData['getspecialisttype'] = $this->admin_model->getSpecialistType();
+			self::$viewData['page'] = "admin/managespecialisttype";
+			$this->load->view(TEMPADMIN, self::$viewData);
+
+		else:   
+			redirect('admin/login');    
+		endif;
+	}
+
+
+	public function addspecialisttype()
+	{
+		if($this->session->userdata('adminid') != ''):
+
+			$specialisttype = $this->input->post('specialisttype');
+
+			$data = array(
+				'SPECIALIST_TYPE' => $specialisttype
+			);
+
+			$insertSpecialistType = $this->admin_model->insertSpecialistType($data);
+
+			if ($insertSpecialistType) {
+				$message = 'A specialist type has been added.';
+				$this->session->set_flashdata('addspecialisttype_success', $message);
+				redirect('admin/managespecialisttype');
+
+			} else {
+				$message = 'Failed to add specialist type.';
+				$this->session->set_flashdata('addspecialisttype_fail', $message);
+				redirect('admin/managespecialisttype');
+			}
+
+		else:   
+			redirect('admin/login');    
+		endif;
+	}
+
+
+	public function editspecialisttype()
+	{
+		// echo "here";exit;
+		if($this->session->userdata('adminid') != ''):
+
+			if (isset($_POST['editspecialisttype-btn'])) {
+
+				$typeid = $this->input->post('typeid');
+
+				$specialisttype = $this->input->post('specialisttype');
+				// echo $specialisttype;exit;
+
+				$data = array(
+					'SPECIALIST_TYPE'	=>	$specialisttype
+				);
+
+				$updateSpecialistType = $this->admin_model->updateSpecialistType($data, $typeid);
+
+				if ($updateSpecialistType) {
+					$message = 'A specialist type has been updated.';
+					$this->session->set_flashdata('typeupdate_success', $message);
+					redirect('admin/managespecialisttype');
+
+				} else {
+					$message = 'Failed to update specialist type.';
+					$this->session->set_flashdata('typeupdate_fail', $message);
+					redirect('admin/managespecialisttype');    		
+				}
+
+			} else {
+
+				$typeid = $this->uri->segment(3);
+
+				self::$viewData['full_title'] = "Admin | Manage Specialist Type";
+				self::$viewData['breadcrumb'] = "Manage Specialist Type"; 
+
+				self::$viewData['specialisttype'] = $this->admin_model->getSpecialistTypeById($typeid);
+				self::$viewData['page'] = "admin/editspecialisttype";
+				$this->load->view(TEMPADMIN, self::$viewData);
+
+			}
+
+		else:   
+			redirect('admin/login');    
+		endif;
+	}
+
+
+	public function deletespecialisttype()
+	{
+		if($this->session->userdata('adminid') != ''):
+
+			$id = $this->input->post('typeid');
+			$specialistTypeDel = $this->admin_model->specialistTypeDel($id);
+
+			if ($specialistTypeDel) {
+				$message = 'An event type has been removed.';
+				$this->session->set_flashdata('typedelete_success', $message);
+				redirect('admin/managespecialisttype');
+
+			} else {
+				$message = 'Failed to remove event type.';
+				$this->session->set_flashdata('typedelete_fail', $message);
+				redirect('admin/managespecialisttype');
+			}
+
+		else:   
+			redirect('admin/login');    
+		endif;
 	}
 
 
@@ -430,93 +551,93 @@ class Admin extends MX_Controller {
 
 
 	public function changeprofileimage()
-    {
-        if($this->session->userdata('adminid') != ''):
+	{
+		if($this->session->userdata('adminid') != ''):
 
-        	$id = $this->input->post('id');
+			$id = $this->input->post('id');
 
-        	$config['upload_path']		= './uploads/images/specialists/';
-            $config['allowed_types']    = 'jpg|jpeg|png|gif|';  /**  All file type selected **/
-            $config['min_size']         = 50;
-            $config['max_size']         = 10000;
-            $config['min_width']        = 50;
-            $config['max_width']        = 100000;
-            $config['min_height']       = 50;
-            $config['max_height']       = 100000;
+			$config['upload_path']		= './uploads/images/specialists/';
+			$config['allowed_types']    = 'jpg|jpeg|png|gif|';  /**  All file type selected **/
+			$config['min_size']         = 50;
+			$config['max_size']         = 10000;
+			$config['min_width']        = 50;
+			$config['max_width']        = 100000;
+			$config['min_height']       = 50;
+			$config['max_height']       = 100000;
 
-            $this->upload->initialize($config);
+			$this->upload->initialize($config);
 
-            if ($this->upload->do_upload('image')) {  
+			if ($this->upload->do_upload('image')) {  
 
-    			$upload_data 	=	$this->upload->data();
-    			$imagename 		=	$upload_data['file_name'];
+				$upload_data 	=	$this->upload->data();
+				$imagename 		=	$upload_data['file_name'];
 
-    			$data = array(
-    				'IMAGE'	=>	$imagename,
-    			);
+				$data = array(
+					'IMAGE'	=>	$imagename,
+				);
 
-    			$updateProfileImg = $this->admin_model->updateProfileImg($id, $data);
+				$updateProfileImg = $this->admin_model->updateProfileImg($id, $data);
 
-    			if ($updateProfileImg) {
-    	    		$message = 'An event image has been updated.';
-    		        $this->session->set_flashdata('imageupdate_success', $message);
-    		        redirect('admin/settings');
+				if ($updateProfileImg) {
+					$message = 'An event image has been updated.';
+					$this->session->set_flashdata('imageupdate_success', $message);
+					redirect('admin/settings');
 
-    	    	} else {
-    	    		$message = 'Failed to update event image.';
-    		        $this->session->set_flashdata('imageupdate_fail', $message);
-    		        redirect('admin/settings');
-    	    	}  	
+				} else {
+					$message = 'Failed to update event image.';
+					$this->session->set_flashdata('imageupdate_fail', $message);
+					redirect('admin/settings');
+				}  	
 
-    		} else {
+			} else {
 
-    	    	$error = array('error' => $this->upload->display_errors());
-    	    	print_r($error);
-            }
+				$error = array('error' => $this->upload->display_errors());
+				print_r($error);
+			}
 
-        else:   
-            redirect('admin/login');    
-        endif;  
-    }
-
-
-
-    public function editProfile()
-    {
-        if($this->session->userdata('adminid') != ''):
-
-        	$id = $this->input->post('id');
-
-        	$data = array(
-        		'NAME' 				=>	$this->input->post('name'),
-        		'SLUG' 				=>	$this->input->post('slug'),
-        		'USERNAME' 			=>	$this->input->post('username'),
-        		'SPECIALIST_TYPE'	=>	$this->input->post('specialisttype')
-        	);
-
-        	$updateProfile = $this->admin_model->updateProfile($id, $data);
-
-        	if ($updateProfile) {
-        		$message = 'Profile has been updated.';
-    	        $this->session->set_flashdata('profileupdate_success', $message);
-    	        redirect('admin/settings');
-
-        	} else {
-        		$message = 'Failed to update profile.';
-    	        $this->session->set_flashdata('profileupdate_fail', $message);
-    	        redirect('admin/settings');
-        	} 
-
-        else:   
-            redirect('admin/login');    
-        endif; 	
-    }
+		else:   
+			redirect('admin/login');    
+		endif;  
+	}
 
 
 
-    public function managequestions()
-    {
-    	if($this->session->userdata('adminid') != ''):
+	public function editProfile()
+	{
+		if($this->session->userdata('adminid') != ''):
+
+			$id = $this->input->post('id');
+
+			$data = array(
+				'NAME' 				=>	$this->input->post('name'),
+				'SLUG' 				=>	$this->input->post('slug'),
+				'USERNAME' 			=>	$this->input->post('username'),
+				'SPECIALIST_TYPE'	=>	$this->input->post('specialisttype')
+			);
+
+			$updateProfile = $this->admin_model->updateProfile($id, $data);
+
+			if ($updateProfile) {
+				$message = 'Profile has been updated.';
+				$this->session->set_flashdata('profileupdate_success', $message);
+				redirect('admin/settings');
+
+			} else {
+				$message = 'Failed to update profile.';
+				$this->session->set_flashdata('profileupdate_fail', $message);
+				redirect('admin/settings');
+			} 
+
+		else:   
+			redirect('admin/login');    
+		endif; 	
+	}
+
+
+
+	public function managequestions()
+	{
+		if($this->session->userdata('adminid') != ''):
 
 			self::$viewData['full_title'] = "Admin | Manage Questions";
 			self::$viewData['breadcrumb'] = "Manage Questions"; 
@@ -528,12 +649,12 @@ class Admin extends MX_Controller {
 		else:   
 			redirect('admin/login');    
 		endif;
-    }
+	}
 
 
-    public function manageanswers()
-    {
-    	if($this->session->userdata('adminid') != ''):
+	public function manageanswers()
+	{
+		if($this->session->userdata('adminid') != ''):
 
 			self::$viewData['full_title'] = "Admin | Manage Answers";
 			self::$viewData['breadcrumb'] = "Manage Answers"; 
@@ -545,11 +666,11 @@ class Admin extends MX_Controller {
 		else:   
 			redirect('admin/login');    
 		endif;
-    }
+	}
 
-    public function deleteforumanswer()
-    {
-    	if($this->session->userdata('adminid') != ''):
+	public function deleteforumanswer()
+	{
+		if($this->session->userdata('adminid') != ''):
 
 			$answerid = $this->input->post('answerid');
 			$forumAnsDelete = $this->admin_model->forumAnsDelete($answerid);
@@ -568,15 +689,15 @@ class Admin extends MX_Controller {
 		else:   
 			redirect('admin/login');    
 		endif;
-    }
+	}
 
 
 
-    public function deleteforumquestion()
-    {
-    	if($this->session->userdata('adminid') != ''):
+	public function deleteforumquestion()
+	{
+		if($this->session->userdata('adminid') != ''):
 
-	    	$questionid = $this->input->post('questionid');
+			$questionid = $this->input->post('questionid');
 
 			$checkQuestionJoin = $this->admin_model->checkQuestionJoin($questionid);
 
@@ -585,13 +706,13 @@ class Admin extends MX_Controller {
 
 				if ($forumQuesDeleteJoin) {
 					$message = 'Your post has been removed.';
-				    $this->session->set_flashdata('questiondelete_success', $message);
-				    redirect('admin/managequestions');
+					$this->session->set_flashdata('questiondelete_success', $message);
+					redirect('admin/managequestions');
 
 				} else {
 					$message = 'Failed to remove your post.';
-				    $this->session->set_flashdata('questiondelete_fail', $message);
-				    redirect('admin/managequestions');
+					$this->session->set_flashdata('questiondelete_fail', $message);
+					redirect('admin/managequestions');
 				}
 
 			} else {
@@ -599,13 +720,13 @@ class Admin extends MX_Controller {
 
 				if ($forumQuestionDelete) {
 					$message = 'Your post has been removed.';
-				    $this->session->set_flashdata('questiondelete_success', $message);
-				    redirect('admin/managequestions');
+					$this->session->set_flashdata('questiondelete_success', $message);
+					redirect('admin/managequestions');
 
 				} else {
 					$message = 'Failed to remove your post.';
-				    $this->session->set_flashdata('questiondelete_fail', $message);
-				    redirect('admin/managequestions');
+					$this->session->set_flashdata('questiondelete_fail', $message);
+					redirect('admin/managequestions');
 				}
 			}
 			
@@ -613,82 +734,82 @@ class Admin extends MX_Controller {
 		else:   
 			redirect('admin/login');    
 		endif;
-    }
+	}
 
 
-    public function privatemessage()
-    {
-    	if($this->session->userdata('adminid') != ''):
+	public function privatemessage()
+	{
+		if($this->session->userdata('adminid') != ''):
 
-    		$userid = $this->uri->segment(3);
-    		$specialistid = $this->session->userdata('adminid');
+			$userid = $this->uri->segment(3);
+			$specialistid = $this->session->userdata('adminid');
 
-    		$table = "tbl_pvt_msg_".$userid."_".$specialistid;
+			$table = "tbl_pvt_msg_".$userid."_".$specialistid;
 
-    		$checktable = "SELECT * 
-                        FROM information_schema.tables
-                        WHERE table_schema = 'medissist' 
-                        AND table_name = '$table'
-                        LIMIT 1";
+			$checktable = "SELECT * 
+			FROM information_schema.tables
+			WHERE table_schema = 'medissist' 
+			AND table_name = '$table'
+			LIMIT 1";
 
-	        $check = $this->db->query($checktable);
+			$check = $this->db->query($checktable);
 
-	        if ($check->num_rows() == 0) {
-	            
-	            $createtable = "CREATE TABLE ".$table." (
-	                            ID INT(6) AUTO_INCREMENT PRIMARY KEY,
-	                            NAME VARCHAR(100) NOT NULL,
-	                            USER_TYPE VARCHAR(30) NOT NULL,
-	                            MESSAGE TEXT NOT NULL,
-	                            SEEN_STATUS INT(2) DEFAULT 0, 
-	                            CREATED TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
-	                            )";
+			if ($check->num_rows() == 0) {
 
-	            $this->db->query($createtable);
-	        } 
+				$createtable = "CREATE TABLE ".$table." (
+				ID INT(6) AUTO_INCREMENT PRIMARY KEY,
+				NAME VARCHAR(100) NOT NULL,
+				USER_TYPE VARCHAR(30) NOT NULL,
+				MESSAGE TEXT NOT NULL,
+				SEEN_STATUS INT(2) DEFAULT 0, 
+				CREATED TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+			)";
 
-			self::$viewData['full_title'] = "Admin | Private Message";
-			self::$viewData['breadcrumb'] = "Private Message"; 
+			$this->db->query($createtable);
+		} 
+
+		self::$viewData['full_title'] = "Admin | Private Message";
+		self::$viewData['breadcrumb'] = "Private Message"; 
 
 			// self::$viewData['getForumAnswers'] = $this->admin_model->getForumAnswers();
-			self::$viewData['getPrivateMessage'] = $this->admin_model->getPrivateMessage($userid);
+		self::$viewData['getPrivateMessage'] = $this->admin_model->getPrivateMessage($userid);
 
-			if (self::$viewData['getPrivateMessage']) {
-				self::$viewData['updateSeenStatus'] = $this->admin_model->updateSeenStatus($table, $userid);
-			}
+		if (self::$viewData['getPrivateMessage']) {
+			self::$viewData['updateSeenStatus'] = $this->admin_model->updateSeenStatus($table, $userid);
+		}
 
-			self::$viewData['getUserById'] = $this->admin_model->getUserById($userid);
-			self::$viewData['page'] = "admin/privatemessage";
-			$this->load->view(TEMPADMIN, self::$viewData);
+		self::$viewData['getUserById'] = $this->admin_model->getUserById($userid);
+		self::$viewData['page'] = "admin/privatemessage";
+		$this->load->view(TEMPADMIN, self::$viewData);
 
-		else:   
-			redirect('admin/login');    
-		endif;
-    }
+	else:   
+		redirect('admin/login');    
+	endif;
+}
 
 
-    public function sendprivatemsg()
-    {
-    	if($this->session->userdata('adminid') != ''):
+public function sendprivatemsg()
+{
+	if($this->session->userdata('adminid') != ''):
 
-    		$receiverid = $this->input->post('receiverid');
-	    	$senderid 	= $this->input->post('senderid');
-	    	$message 	= $this->input->post('privatemsg');
+		$receiverid = $this->input->post('receiverid');
+		$senderid 	= $this->input->post('senderid');
+		$message 	= $this->input->post('privatemsg');
 
-	    	$insertPrivateMsg = $this->admin_model->insertPrivateMsg($receiverid, $senderid, $message);
+		$insertPrivateMsg = $this->admin_model->insertPrivateMsg($receiverid, $senderid, $message);
 
-	    	if ($insertPrivateMsg) {
-	    		redirect('admin/privatemessage/'.$receiverid);
-	    	} else {
-	    		$message = 'Message sending failed.';
-				$this->session->set_flashdata('msg_send_fail', $message);
-	    		redirect('admin/privatemessage/'.$receiverid);
-	    	}
+		if ($insertPrivateMsg) {
+			redirect('admin/privatemessage/'.$receiverid);
+		} else {
+			$message = 'Message sending failed.';
+			$this->session->set_flashdata('msg_send_fail', $message);
+			redirect('admin/privatemessage/'.$receiverid);
+		}
 
-    	else:   
-			redirect('admin/login');    
-		endif;
-    }
+	else:   
+		redirect('admin/login');    
+	endif;
+}
 
 
 

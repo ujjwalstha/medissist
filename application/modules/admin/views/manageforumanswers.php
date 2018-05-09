@@ -22,7 +22,7 @@
 				<div class="box box-danger">
 
 					<div class="box-header with-border">
-						<h3 class="box-title">Manage your specialists</h3>
+						<h3 class="box-title">Manage forum answers</h3>
 					</div>
 
 					<!-- /.box-header -->

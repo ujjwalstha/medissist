@@ -365,10 +365,40 @@ class Admin_model extends CI_Model {
             </span>';
         }
                              
-
     }
 
 
+    public function insertSpecialistType($data)
+    {
+        return $this->db->insert('tbl_specialist_type', $data);
+    }
+
+
+    public function getSpecialistType()
+    {
+        return $this->db->get('tbl_specialist_type')->result();
+    }
+
+    public function getSpecialistTypeById($typeid)
+    {
+        $where = array('TYPEID' => $typeid);
+        return $this->db->get_where('tbl_specialist_type', $where)->row();
+    }
+
+
+    public function specialistTypeDel($id)
+    {
+        $this->db->where('TYPEID', $id);
+        return $this->db->delete('tbl_specialist_type');
+    }
+
+    public function updateSpecialistType($data, $typeid)
+    {
+        // echo $typeid;exit;
+        $where = array('TYPEID' => $typeid);
+        $this->db->where($where);
+        return $this->db->update('tbl_specialist_type', $data);
+    }
 
 
 }

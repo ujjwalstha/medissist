@@ -81,7 +81,7 @@
 		<!--//footer-->
 		<div class="footer-bottom">
 			<div class="container">
-				<p>© 2018 Medicinal. All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
+				<p>© 2018 Medissist. All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
 			</div>
 		</div>
 		<!--start-smooth-scrolling-->

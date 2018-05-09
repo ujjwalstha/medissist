@@ -225,4 +225,38 @@ class Site_model extends CI_Model {
             return true;
         }
     }
+
+
+    public function getSearchSpecialist($search)
+    {
+        $sql = "SELECT * FROM `tbl_admin_detail` WHERE `ADMIN_TYPE` LIKE '%2%' AND `NAME` LIKE '%$search%' AND `STATUS` LIKE '%1%'"; 
+
+        $result = $this->db->query($sql);
+        // return $rows = $result->num_rows();
+
+        if ($result->num_rows() > 0) {
+            return $result->result();
+        } else {
+            return false;
+        }
+    }
+
+    public function getSortspecialist($specialisttype)
+    {
+        if ($specialisttype == "all") {
+            $sql = "SELECT * FROM `tbl_admin_detail` WHERE `ADMIN_TYPE` LIKE '%2%' AND `STATUS` LIKE '%1%'";
+
+        } elseif ($specialisttype != "all") {
+            $sql = "SELECT * FROM `tbl_admin_detail` WHERE `STATUS` LIKE '%1%' AND `ADMIN_TYPE` LIKE '%2%' AND `SPECIALIST_TYPE` LIKE '%$specialisttype%'";
+        }
+
+        $result = $this->db->query($sql);
+        // return $rows = $result->num_rows();
+
+        if ($result->num_rows() > 0) {
+            return $result->result();
+        } else {
+            return false;
+        }
+    }
 }

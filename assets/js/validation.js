@@ -212,6 +212,39 @@ $(document).ready(function(){
 
 
 
+$(document).ready(function(){
+
+  $(document).off("click", "#addspecialisttype-btn").on("click", "#addspecialisttype-btn", function(){
+
+    $("form[name='addspecialisttype']").validate({
+      // Specify validation rules
+      rules: {
+       
+        specialisttype: {
+          required: true,
+        },
+        
+      },
+      // Specify validation error messages
+      messages: {
+        
+        specialisttype: {
+          required: "Please enter an event type",
+        },
+      },
+       
+    });
+
+  });
+
+  
+
+
+ 
+});
+
+
+
 
 
 

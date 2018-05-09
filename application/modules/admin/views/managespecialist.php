@@ -80,7 +80,14 @@
                     <div class="control-group">
                       <div class="form-group">
                         <label>Specialist Type</label>
-                        <input type="text" class="form-control" placeholder="Specialist Type" name="specialisttype" id="specialisttype">
+                        <select class="form-control" name="specialisttype" id="specialisttype" required>
+                          <option text-muted selected disabled >Select Specialist Type</option>
+                          <?php
+                          foreach ($getspecialisttype as $type):
+                            ?>
+                            <option value="<?php echo $type->SPECIALIST_TYPE ?>"><?php echo ucwords($type->SPECIALIST_TYPE); ?></option>
+                          <?php endforeach; ?>
+                        </select>
                       </div>
                     </div>
 
@@ -131,20 +138,20 @@
                   <?php endif; ?>
 
                   <?php if ($this->session->flashdata('useractivate_success')): ?>
-                      <div class="alert alert-success" style="text-align: center;font-size: 12px">
-                        <i class="fa fa-check-circle"></i>
-                        <?= $this->session->flashdata('useractivate_success'); ?>
-                      </div>
-                    <?php endif; ?>
+                    <div class="alert alert-success" style="text-align: center;font-size: 12px">
+                      <i class="fa fa-check-circle"></i>
+                      <?= $this->session->flashdata('useractivate_success'); ?>
+                    </div>
+                  <?php endif; ?>
                   
-                    <?php if ($this->session->flashdata('userdeactivate_success')): ?>
-                      <div class="alert alert-danger" style="text-align: center;font-size: 12px">
-                        <i class="fa fa-check-circle"></i>
-                        <?= $this->session->flashdata('userdeactivate_success'); ?>
-                      </div>
-                    <?php endif; ?>
+                  <?php if ($this->session->flashdata('userdeactivate_success')): ?>
+                    <div class="alert alert-danger" style="text-align: center;font-size: 12px">
+                      <i class="fa fa-check-circle"></i>
+                      <?= $this->session->flashdata('userdeactivate_success'); ?>
+                    </div>
+                  <?php endif; ?>
 
-                     <?php if ($this->session->flashdata('specialistdelete_success')): ?>
+                  <?php if ($this->session->flashdata('specialistdelete_success')): ?>
                     <div class="alert alert-success" style="font-size: 14px; text-align: center;">
                       <i class="fa fa-check-circle"></i>
                       <?php echo $this->session->flashdata('specialistdelete_success') ?>
@@ -193,71 +200,71 @@
                     <?php
                     $i = 1; 
                     if(is_array($getspecialist)):
-                    foreach($getspecialist as $specialist): 
-                      ?>
+                      foreach($getspecialist as $specialist): 
+                        ?>
 
-                      <tr>
-                        <td><?php echo $i++; ?></td>
-                        <td><?php echo $specialist->NAME; ?></td>
-                        <td><?php echo $specialist->USERNAME; ?></td>
-                        <td><?php echo $specialist->SPECIALIST_TYPE; ?></td>
-                        <td><img src="<?php echo base_url().'uploads/images/specialists/'.$specialist->IMAGE ?>" style="height: 70px; width: 70px"></td>
-                        <td><?php echo ($specialist->ONLINE_STATUS == 1) ? '<i class="fa fa-circle text-success"></i> Online' : '<i class="fa fa-circle text-danger"></i> Offline'; ?></td>
+                        <tr>
+                          <td><?php echo $i++; ?></td>
+                          <td><?php echo $specialist->NAME; ?></td>
+                          <td><?php echo $specialist->USERNAME; ?></td>
+                          <td><?php echo $specialist->SPECIALIST_TYPE; ?></td>
+                          <td><img src="<?php echo base_url().'uploads/images/specialists/'.$specialist->IMAGE ?>" style="height: 70px; width: 70px"></td>
+                          <td><?php echo ($specialist->ONLINE_STATUS == 1) ? '<i class="fa fa-circle text-success"></i> Online' : '<i class="fa fa-circle text-danger"></i> Offline'; ?></td>
 
-                        <td>
+                          <td>
 
-                          <?php 
-                          $attributes = array('method' => 'post');
-                          echo form_open('admin/specialiststatus', $attributes);
-                          
-                          ?>  
+                            <?php 
+                            $attributes = array('method' => 'post');
+                            echo form_open('admin/specialiststatus', $attributes);
 
-                          <input type="hidden" name="userid" value="<?= $specialist->ID ?>">
+                            ?>  
 
-                          <?php if ($specialist->STATUS == 0): ?>
-                            <button type="submit" class="btn btn-success btn-xs" name="activate"> Activate</button>
-                          <?php else: ?>
-                            <button type="submit" class="btn btn-danger btn-xs" name="deactivate"> Deactivate</button>
-                          <?php endif;  ?>
+                            <input type="hidden" name="userid" value="<?= $specialist->ID ?>">
 
-                          <?php echo form_close(); ?>
-                        </td>
-                        <td>
+                            <?php if ($specialist->STATUS == 0): ?>
+                              <button type="submit" class="btn btn-success btn-xs" name="activate"> Activate</button>
+                              <?php else: ?>
+                                <button type="submit" class="btn btn-danger btn-xs" name="deactivate"> Deactivate</button>
+                              <?php endif;  ?>
 
-                          <?php 
-                          $attributes = array('method' => 'post');
-                          echo form_open('admin/deletespecialist', $attributes);
-                          ?>  
-                          <input type="hidden" name="userid" value="<?= $specialist->ID ?>">
-                          <button type="submit" class="btn btn-danger btn-xs" id="deleteBtn" name="deleteBtn" onclick="return confirm('Confirm delete?')"><span class="fa fa-trash-o"></span>
-                          </button>
-                          <?php echo form_close(); ?>
-                        </td>
-                      </tr>
+                              <?php echo form_close(); ?>
+                            </td>
+                            <td>
 
-                    <?php endforeach; ?>
-                  <?php endif; ?>
+                              <?php 
+                              $attributes = array('method' => 'post');
+                              echo form_open('admin/deletespecialist', $attributes);
+                              ?>  
+                              <input type="hidden" name="userid" value="<?= $specialist->ID ?>">
+                              <button type="submit" class="btn btn-danger btn-xs" id="deleteBtn" name="deleteBtn" onclick="return confirm('Confirm delete?')"><span class="fa fa-trash-o"></span>
+                              </button>
+                              <?php echo form_close(); ?>
+                            </td>
+                          </tr>
 
-                  </tbody>
+                        <?php endforeach; ?>
+                      <?php endif; ?>
+
+                    </tbody>
 
 
-                </table>
+                  </table>
 
-                <br> 
+                  <br> 
 
-              </div>  
+                </div>  
+
+              </div>
 
             </div>
 
-          </div>
+          </section>
+        </div>
+        <!-- Main row ends -->
 
-        </section>
-      </div>
-      <!-- Main row ends -->
-
-    </section>
-    <!-- Main content ends -->
-  </div>
+      </section>
+      <!-- Main content ends -->
+    </div>
 
 
 

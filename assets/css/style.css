@@ -137,7 +137,7 @@ a i.dribble {
     font-size: 16px;
     margin-bottom: 0;
     background: url(../images/arrow_down.png) no-repeat 92% center #ffffff;
-    background-size: 5% !important;
+    /*background-size: 5% !important;*/
     -webkit-appearance: none;
 }
 .header-middle form input[type="submit"]{
@@ -804,7 +804,7 @@ a.hi-icon.icon4:hover {
     -ms-transition: all 0.3s ease;
     -webkit-transition: all 0.3s ease;
 }
-.btm-right:hover .captn{
+.captn:hover{
     background: #118184;
     transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
@@ -3184,6 +3184,7 @@ float:left;
 		padding: 11px 8px;
 		font-size: 15px;
 		background: url(../images/arrow_down.png) no-repeat 92% center #ffffff;
+        width: 100%;
 	}
 	.header-middle form input[type="submit"] {
 		background: url(../images/search.png) no-repeat -2px -5px #e45753;
@@ -3391,6 +3392,7 @@ float:left;
 		margin-left: 0px;
 		margin-top: 9px;
 	}
+    
 	.item, .item-hover, .item-hover .mask, .item-img, .item-info {
 		height: 163px;
 	}
@@ -3601,30 +3603,30 @@ float:left;
 }
 
 
-/*Medicines section css starts */
+/*Health problem section css starts */
 
 * {
   box-sizing: border-box;
 }
 
-#myInput {
-  background-image: url('../images/searchicon.png');
-  background-position: 10px 12px;
+#myHealthInput {
+  /*background-image: url('../images/searchicon.png');
+  background-position: 10px 12px;*/
   background-repeat: no-repeat;
   width: 100%;
   font-size: 16px;
-  padding: 12px 20px 12px 40px;
+  padding: 12px 20px 12px 10px;
   border: 1px solid #ddd;
   margin-bottom: 12px;
 }
 
-#myUL {
+#myHealthUL {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
 
-#myUL li a {
+#myHealthUL li a {
   border: 1px solid #ddd;
   margin-top: -1px; /* Prevent double borders */
   background-color: #f6f6f6;
@@ -3635,11 +3637,91 @@ float:left;
   display: block
 }
 
-#myUL li a:hover:not(.header) {
+#myHealthUL li a:hover:not(.header) {
+  background-color: #eee;
+}
+
+/*Health problem section css ends */
+
+
+/*Medicines section css starts */
+
+* {
+  box-sizing: border-box;
+}
+
+#myMedicineInput {
+  /*background-image: url('../images/searchicon.png');*/
+  background-position: 10px 12px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 10px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+#myMedicineUL {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#myMedicineUL li a {
+  border: 1px solid #ddd;
+  margin-top: -1px; /* Prevent double borders */
+  background-color: #f6f6f6;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+  display: block
+}
+
+#myMedicineUL li a:hover:not(.header) {
   background-color: #eee;
 }
 
 /*Medicines section css ends */
 
 
+#specialist-img:hover {
+    opacity: 0.7;
+}
+
+
+p.user-top-header:hover {
+    color: #e45753;
+}
+
+
+/*LOADER CSS STARTS*/
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+  margin-top: 135px; 
+  margin-bottom: 140px;
+  margin-left: 50%;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+/*LOADER CSS ENDS*/
+
+#refresh-page{
+    cursor: pointer;
+    text-align: center;
+}
 
