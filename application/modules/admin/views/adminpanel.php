@@ -80,14 +80,14 @@
 				<!-- small box -->
 				<div class="small-box bg-red">
 					<div class="inner">
-						<h3><?php echo 'Not updated'; ?></h3>
+						<h3><?php echo $specialistTypeCount; ?></h3>
 
 						<p>Specialist Type</p>
 					</div>
 					<div class="icon">
 						<i class="ion ion-plus"></i>
 					</div>
-					<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+					<a href="<?php echo base_url().'admin/managespecialisttype' ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 				</div>
 			</div>
 			<!-- ./col -->

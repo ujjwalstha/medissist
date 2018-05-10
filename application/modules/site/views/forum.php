@@ -103,7 +103,7 @@
 
 							<div class="col-md-11">
 								<text class="text-muted" style="font-weight: bold"><?php echo $question->FIRSTNAME.' '.$question->LASTNAME; ?></text><br>
-								<label style="font-size: 14px; font-style: italic;"><?php echo $question->QUESTION; ?></label>
+								<label style="font-size: 14px; font-style: italic; font-weight: normal;"><?php echo $question->QUESTION; ?></label>
 							</div>
 
 						</div>
@@ -166,7 +166,7 @@
 											<div class="col-md-11">
 
 												<text class="text-muted" style="font-weight: bold"><?php echo $res->FIRSTNAME.' '.$res->LASTNAME; ?></text> <br>
-												<label style="font-size: 14px; font-style: italic;"><?php echo $res->ANSWER; ?></label>
+												<label style="font-size: 14px; font-style: italic; font-weight: normal;"><?php echo $res->ANSWER; ?></label>
 											</div>
 
 										</div>

@@ -52,7 +52,7 @@
 						<span class="icon-bar"></span>
 					</button>
 					<div class="logo">
-						<h1><a class="navbar-brand" href="<?php echo base_url().'home' ?>"><span>M</span>edissist <img src="<?php echo base_url().'assets/images/logo2.png' ?>" alt=" " /></a></h1>
+						<h1 id="main-nav-title"><a class="navbar-brand" href="<?php echo base_url().'home' ?>"><span>M</span>edissist <img src="<?php echo base_url().'assets/images/logo2.png' ?>" alt=" " /></a></h1>
 					</div>
 				</div>
 
@@ -65,7 +65,7 @@
 
 								<li class="menu__item"><a href="<?php echo base_url().'home' ?>" class="menu__link"><span class="menu__helper"><i class="fa fa-home"></i></span></a></li>
 
-								<li class="menu__item"><a href="<?php echo base_url().'medicines' ?>" class="menu__link"><span class="menu__helper">Medicines</span></a></li>
+								<li class="menu__item"><a href="<?php echo base_url().'medicines' ?>" class="menu__link"><span class="menu__helper">Health Care AND Medicines</span></a></li>
 
 								<li class="menu__item"><a href="<?php echo base_url().'healthspecialist' ?>" class="menu__link"><span class="menu__helper">Health Specialists</span></a></li>
 

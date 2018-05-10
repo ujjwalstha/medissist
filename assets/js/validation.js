@@ -211,7 +211,7 @@ $(document).ready(function(){
 /** Change profile setting validation ends here **/
 
 
-
+/** Add specialist type validation **/
 $(document).ready(function(){
 
   $(document).off("click", "#addspecialisttype-btn").on("click", "#addspecialisttype-btn", function(){
@@ -229,7 +229,7 @@ $(document).ready(function(){
       messages: {
         
         specialisttype: {
-          required: "Please enter an event type",
+          required: "Please enter a specialist type",
         },
       },
        
@@ -237,11 +237,76 @@ $(document).ready(function(){
 
   });
 
-  
-
-
- 
 });
+/** Add specialist type validation ends here **/
+
+
+/** Edit specialist type validation **/
+$(document).ready(function(){
+
+  $(document).off("click", "#editspecialisttype-btn").on("click", "#editspecialisttype-btn", function(){
+
+    $("form[name='editspecialisttype']").validate({
+      // Specify validation rules
+      rules: {
+       
+        specialisttype: {
+          required: true,
+        },
+        
+      },
+      // Specify validation error messages
+      messages: {
+        
+        specialisttype: {
+          required: "Please enter a specialist type",
+        },
+      },
+       
+    });
+
+  });
+
+});
+/** Edit specialist type validation ends here **/
+
+
+/** Add specialist type validation **/
+$(document).ready(function(){
+
+  $(document).off("click", "#addhealthproblems-btn").on("click", "#addhealthproblems-btn", function(){
+
+    $("form[name='addhealthproblems']").validate({
+      // Specify validation rules
+      rules: {
+       
+        name: {
+          required: true,
+        },
+
+        description: {
+          required: true,
+        },
+        
+      },
+      // Specify validation error messages
+      messages: {
+        
+        name: {
+          required: "Please enter title",
+        },
+
+        description: {
+          required: "Please enter description",
+        },
+      },
+       
+    });
+
+  });
+
+});
+/** Edit specialist type validation ends here **/
 
 
 

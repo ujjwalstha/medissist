@@ -2,7 +2,7 @@
 <div class="top_banner two">
 	<div class="container">
 		<div class="sub-hd-inner">
-			<h3 class="tittle">MEDI<span>CINES</span></h3>
+			<h3 class="tittle">HEALTH CARE<span> AND MEDICINES</span></h3>
 		</div>
 	</div>
 </div>
@@ -24,7 +24,7 @@
 
 					<li role="presentation" class="active"><a href="#healthproblem" id="healthproblem-tab" role="tab" data-toggle="tab" aria-controls="healthproblem" >Health Problems</a></li>
 
-					<li role="presentation"><a href="#medicalproduct" role="tab" id="medicalproduct-tab" data-toggle="tab" aria-controls="medicalproduct">Medical Products</a></li>
+					<li role="presentation"><a href="#medicalproduct" role="tab" id="medicalproduct-tab" data-toggle="tab" aria-controls="medicalproduct">Medicinal Products</a></li>
 
 
 					<!-- <li role="presentation"><a href="#tree" role="tab" id="tree-tab" data-toggle="tab" aria-controls="tree">Extras</a></li> -->
@@ -38,13 +38,9 @@
 							<input type="text" id="myHealthInput" onkeyup="myHealthFunction()" placeholder="Search for health problem" title="Type in a name">
 
 							<ul id="myHealthUL">
-								<li><a href="#">Adele</a></li>
-								<li><a href="#">Agnes</a></li>
-								<li><a href="#">Billy</a></li>
-								<li><a href="#">Bob</a></li>
-								<li><a href="#">Calvin</a></li>
-								<li><a href="#">Christina</a></li>
-								<li><a href="#">Cindy</a></li>
+								<?php foreach($gethealthproblems as $healthproblem): ?>
+									<li><a href="#" id="healthproblem-list" data-id="<?php echo $healthproblem->ID ?>"><?php echo $healthproblem->NAME; ?></a></li>
+								<?php endforeach; ?>
 							</ul>
 
 							<script>
@@ -68,12 +64,8 @@
 
 						</div>
 
-						<div class="col-md-9 col-sm-9 tab-info">
-							<p><text style="font-weight: bold; font-size: 25px">Topic Goes Here</text>
-							<hr style="height: 1px; background-color: #777777;"></p>
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+						<div class="col-md-9 col-sm-9 tab-info" id="healthproblemcontent" style="margin-top: 7px">
+							<div class="loader mx-auto" id="loading"></div>
 						</div>
 						<div class="clearfix"></div>
 					</div>
@@ -156,6 +148,52 @@
 
 </div>			
 <!--//team-->
+
+
+<script>
+
+	$(document).ready(function() {
+
+		$(window).on('load', function(){ //for displaying all the data as the page loads(but not working -_-)
+			// alert('hi');
+			$("#healthproblem-list").trigger("click");
+		})
+
+		$(document).ajaxStart(function(){  //For loader 
+			$('#loading').show();
+		}).ajaxStop(function(){
+			$('#loading').hide();
+		})
+
+		$(document).off("click", "#healthproblem-list").on("click", "#healthproblem-list", function(e){
+			e.preventDefault();
+	         
+	         var title = $(this).text();
+	         var id  = $(this).data('id');
+	         // alert(id);
+	         var url = "<?php echo base_url('site/healthproblemdata') ?>";
+
+	         $.ajax({
+	         	type : "post",
+	         	url  : url,
+	         	cache: true,
+	         	data : {"id" : id, "title" : title},
+	         	dataType : "json",
+
+	         	success : function(resp) {
+	         		if(resp.status == 'success'){
+	         			$("#healthproblemcontent").html(resp.data);
+	         		}
+	         	}
+
+	         })
+	     });
+
+
+
+	});
+
+</script>
 
 
 

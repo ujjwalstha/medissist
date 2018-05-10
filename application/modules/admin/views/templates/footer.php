@@ -80,6 +80,7 @@
    
    <script src="<?php echo base_url().'assets/datatables/DataTables-1.10.16/js/jquery.dataTables.min.js' ?>"></script>
    <script src="<?php echo base_url().'assets/datatables/DataTables-1.10.16/js/dataTables.bootstrap.min.js' ?>"></script>
+   <script type="text/javascript" src="<?php echo base_url().'assets/ckeditor/ckeditor.js' ?>"> </script>
 
 
 
@@ -88,6 +89,11 @@
  
 </body>
 </html>
+
+
+<script>
+    CKEDITOR.replace('description');
+</script>
 
 
 <script>
@@ -105,6 +111,9 @@
   });
 
 </script>
+
+
+
 
 
 

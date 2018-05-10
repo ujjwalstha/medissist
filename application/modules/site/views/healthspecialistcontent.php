@@ -17,14 +17,14 @@ if(is_array($getspecialist)) :
 						</div> -->
 						<div class="captn">
 							<h4><?php echo $specialist->NAME; ?></h4>	
-							<h2>- <?php echo $specialist->SPECIALIST_TYPE; ?></h2><br>
-							<h2>
+							<h5>- <?php echo $specialist->SPECIALIST_TYPE; ?></h5><br>
+							<h5>
 								<?php if($specialist->ONLINE_STATUS == 1): ?>
 									<i class="fa fa-circle text-success"></i> Online
 									<?php else: ?>
 										<i class="fa fa-circle text-danger"></i> Offline
 									<?php endif; ?>
-								</h2> <br>
+								</h5> <br>
 
 								<a href="<?php echo base_url().'privatemessage/'.$specialist->ID ?>" class="btn btn-danger"><i class="fa fa-envelope"></i> SEND PRIVATE MESSAGE</a>
 							</div>
@@ -34,7 +34,7 @@ if(is_array($getspecialist)) :
 
 				<?php else: ?>
 					<div class="alert alert-danger" style="text-align: center; margin-top: 50px" >
-						<text>No result found.</text>
+						<text>No specialist found.</text>
 					</div>
 					<div id="refresh-page"><a onclick='window.location.reload(true);' >Refresh this page.</a></div>
 				<?php endif; ?>

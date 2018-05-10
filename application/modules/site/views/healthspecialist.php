@@ -21,7 +21,7 @@
 				<div class="header-search" style="width: 100%">
 					<form id="searchthis">
 						<div class="search">
-							<input type="search" value="Search" name="search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}" required="" class="searchField">
+							<input type="search" value="Search for specialist name" name="search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}" required="" class="searchField">
 						</div>
 
 						<div class="sear-sub">
@@ -37,11 +37,11 @@
 
 				<div class="section_room" style="width: 100%">
 					<select id="specialisttype"  class="frm-field required">
-						<option value="all">All</option>
+						<option class="specialisttype-option" value="all">All</option>
 						<?php
 						foreach ($getspecialisttype as $type):
 							?>
-							<option value="<?php echo $type->SPECIALIST_TYPE ?>"><?php echo ucwords($type->SPECIALIST_TYPE); ?></option>
+							<option class="specialisttype-option" value="<?php echo $type->SPECIALIST_TYPE ?>"><?php echo ucwords($type->SPECIALIST_TYPE); ?></option>
 						<?php endforeach; ?>
 					</select>
 				</div>

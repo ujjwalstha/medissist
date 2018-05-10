@@ -414,8 +414,8 @@ class Site extends MX_Controller {
     {
     	if($this->session->userdata('userid') != ''):
 
-			self::$viewData['title'] = 'Medissist | Medicines';
-			// self::$viewData['getspecialist'] = $this->site_model->getspecialist();
+			self::$viewData['title'] = 'Medissist | Health Care and Medicines';
+			self::$viewData['gethealthproblems'] = $this->site_model->getHealthProblems();
 			self::$viewData['page'] = 'site/medicines';
 			$this->load->view(TEMPPATH, self::$viewData);
 
@@ -473,6 +473,45 @@ class Site extends MX_Controller {
 
     			//var_dump($data['eventCount']);exit;
     			$view = $this->load->view('site/healthspecialistcontent', $data, TRUE);
+
+    			// var_dump($view);exit;
+
+    			$response = array(
+    				'status' => 'success',
+    				'data'	 =>	$view
+    			);
+
+    		} catch (Exception $e) {
+    			$response = array(
+    				'status' 	=> 'error',
+    				'message'	=> $e->getMessage()	
+    			);
+    		} 
+
+    		header("Content-Type: application/json");
+    		echo json_encode($response);
+
+    	} else {
+    		exit("No direct script allowed");
+    	}
+    }
+
+
+    public function healthproblemdata()
+    {
+    	if ($this->input->is_ajax_request()) {
+
+    		try {
+    			$id 	= $this->input->post('id');
+    			$title 	= $this->input->post('title');
+    			// echo $specialisttype; exit;
+
+    			$data['title'] 				= $title;
+    			$data['gethealthproblem'] 	= $gethealthproblem = $this->site_model->getHealthProblemById($id);
+    			// $data['eventCount'] = count($getEvents);
+
+    			//var_dump($data['eventCount']);exit;
+    			$view = $this->load->view('site/healthproblemcontent', $data, TRUE);
 
     			// var_dump($view);exit;
 

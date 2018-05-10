@@ -77,6 +77,11 @@ class Admin_model extends CI_Model {
         return $this->db->count_all_results('tbl_forum_answers');
     }
 
+    public function specialistTypeCount()
+    {
+        return $this->db->count_all_results('tbl_specialist_type');
+    }
+
 
     public function addspecialist($data)
     {
@@ -400,5 +405,51 @@ class Admin_model extends CI_Model {
         return $this->db->update('tbl_specialist_type', $data);
     }
 
+
+    public function insertHealthProblems($data)
+    {
+        return $this->db->insert('tbl_health_problems', $data);
+    }
+
+     public function getHealthProblems()
+    {
+        return $this->db->get('tbl_health_problems')->result();
+    }
+
+    public function healthproblemActivate($id)
+    {
+        $this->db->set('STATUS', '1');
+        $this->db->where('ID', $id);
+        $this->db->update('tbl_health_problems');
+    }
+
+
+    public function healthproblemDeactivate($id)
+    {
+        $where = array('ID' => $id);
+        $this->db->set('STATUS', '0');
+        $this->db->where($where);
+        $this->db->update('tbl_health_problems');
+    }
+
+    public function healthProblemDel($id)
+    {
+        $this->db->where('ID', $id);
+        return $this->db->delete('tbl_health_problems');
+    }
+
+    public function getHealthProblemById($id)
+    {
+        $where = array('ID' => $id);
+        return $this->db->get_where('tbl_health_problems', $where)->row();
+    }
+
+
+    public function updateHealthProblem($data, $id)
+    {
+        $where = array('ID' => $id);
+        $this->db->where($where);
+        return $this->db->update('tbl_health_problems', $data);
+    }
 
 }

@@ -259,4 +259,18 @@ class Site_model extends CI_Model {
             return false;
         }
     }
+
+
+    public function getHealthProblems()
+    {
+        $this->db->order_by('NAME', 'ASC');
+        return $this->db->get('tbl_health_problems')->result();
+    }
+
+
+    public function getHealthProblemById($id)
+    {
+        $where = array('ID' => $id);
+        return $this->db->get_where('tbl_health_problems', $where)->row();
+    }
 }

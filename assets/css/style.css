@@ -127,7 +127,7 @@ a i.dribble {
 	background:#fff;
 }
 .section_room select {
-    padding: 17px 10px;
+    /*padding: 17px 10px;*/
     width: 100%;
     font-weight: normal;
     background: none;
@@ -785,7 +785,7 @@ a.hi-icon.icon4:hover {
 	    border-bottom: 7px solid #1B242F;
 }
 .captn h4 {
-    font-size: 22px;
+    /*font-size: 22px;*/
     color: #fff;
     padding:0.5em 0;
 }
@@ -1274,11 +1274,11 @@ ul.ab li a:hover{
 }
 .mb-60 h4 {
     margin: 36px 0 38px;
-    font-size: 24px;
+    /*font-size: 24px;*/
 }
 .mb-60 h1, h2, h3, h4, h5, h6 {
     padding-left: 0;
-    font-size: 2em;
+    /*font-size: 2em;*/
     text-transform: uppercase;
 }
 .list-group-item {
@@ -3724,4 +3724,18 @@ p.user-top-header:hover {
     cursor: pointer;
     text-align: center;
 }
+
+h1#main-nav-title {
+     margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+#healthproblemdesc{
+    color: #777777;
+}
+
 

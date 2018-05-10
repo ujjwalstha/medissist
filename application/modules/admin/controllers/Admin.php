@@ -109,10 +109,11 @@ class Admin extends MX_Controller {
 			self::$viewData['breadcrumb'] = "Dashboard"; 
 			self::$viewData['breadcrumb_small'] = "Admin Panel"; 
 
-			self::$viewData['userCount'] = $this->admin_model->userCount();; 
-			self::$viewData['specialistCount'] = $this->admin_model->specialistCount();; 
-			self::$viewData['forumQuestionCount'] = $this->admin_model->forumQuestionCount();; 
-			self::$viewData['forumAnswerCount'] = $this->admin_model->forumAnswerCount();; 
+			self::$viewData['userCount'] = $this->admin_model->userCount();
+			self::$viewData['specialistCount'] = $this->admin_model->specialistCount();
+			self::$viewData['forumQuestionCount'] = $this->admin_model->forumQuestionCount();
+			self::$viewData['forumAnswerCount'] = $this->admin_model->forumAnswerCount();
+			self::$viewData['specialistTypeCount'] = $this->admin_model->specialistTypeCount(); 
 
 			self::$viewData['page'] = "admin/adminpanel";
 			$this->load->view(TEMPADMIN, self::$viewData);
@@ -782,34 +783,193 @@ class Admin extends MX_Controller {
 		self::$viewData['page'] = "admin/privatemessage";
 		$this->load->view(TEMPADMIN, self::$viewData);
 
-	else:   
-		redirect('admin/login');    
-	endif;
-}
+		else:   
+			redirect('admin/login');    
+		endif;
+	}
 
 
-public function sendprivatemsg()
-{
-	if($this->session->userdata('adminid') != ''):
+	public function sendprivatemsg()
+	{
+		if($this->session->userdata('adminid') != ''):
 
-		$receiverid = $this->input->post('receiverid');
-		$senderid 	= $this->input->post('senderid');
-		$message 	= $this->input->post('privatemsg');
+			$receiverid = $this->input->post('receiverid');
+			$senderid 	= $this->input->post('senderid');
+			$message 	= $this->input->post('privatemsg');
 
-		$insertPrivateMsg = $this->admin_model->insertPrivateMsg($receiverid, $senderid, $message);
+			$insertPrivateMsg = $this->admin_model->insertPrivateMsg($receiverid, $senderid, $message);
 
-		if ($insertPrivateMsg) {
-			redirect('admin/privatemessage/'.$receiverid);
-		} else {
-			$message = 'Message sending failed.';
-			$this->session->set_flashdata('msg_send_fail', $message);
-			redirect('admin/privatemessage/'.$receiverid);
-		}
+			if ($insertPrivateMsg) {
+				redirect('admin/privatemessage/'.$receiverid);
+			} else {
+				$message = 'Message sending failed.';
+				$this->session->set_flashdata('msg_send_fail', $message);
+				redirect('admin/privatemessage/'.$receiverid);
+			}
 
-	else:   
-		redirect('admin/login');    
-	endif;
-}
+		else:   
+			redirect('admin/login');    
+		endif;
+	}
+
+
+	public function healthproblems()
+	{
+		if($this->session->userdata('adminid') != ''):
+
+			self::$viewData['full_title'] = "Admin | Health Problems";
+			self::$viewData['breadcrumb'] = "Health Problems"; 
+
+			self::$viewData['getHealthProblems'] = $this->admin_model->getHealthProblems();
+			self::$viewData['page'] = "admin/healthproblems";
+			$this->load->view(TEMPADMIN, self::$viewData);
+
+		else:   
+			redirect('admin/login');    
+		endif;
+	}
+
+
+	public function addhealthproblems()
+	{
+		if($this->session->userdata('adminid') != ''):
+
+			$name 			= $this->input->post('name');
+			$slug 			= $this->input->post('slug');
+			$description 	= $this->input->post('description');
+
+			$data = array(
+				'NAME'			=> $name,
+				'SLUG'		  	=> $slug,
+				'DESCRIPTION'	=> $description
+			);
+
+			$insertHealthProblems = $this->admin_model->insertHealthProblems($data);
+
+			if ($insertHealthProblems) {
+				$message = 'A health problem has been added.';
+				$this->session->set_flashdata('addhealthproblem_success', $message);
+				redirect('admin/healthproblems');
+
+			} else {
+				$message = 'Failed to add health problem.';
+				$this->session->set_flashdata('addhealthproblem_fail', $message);
+				redirect('admin/healthproblems');
+			}
+
+		else:   
+			redirect('admin/login');    
+		endif;
+	}
+
+
+	public function healthproblemstatus()
+	{
+		if($this->session->userdata('adminid') != '') {
+
+			$id = $this->input->post('userid');
+
+	        $activate = $this->input->post('activate'); //to activate user
+	        if (isset($activate)) {
+	        	$this->admin_model->healthproblemActivate($id);
+	        	$message = 'Health problem status has been activated.';
+	        	$this->session->set_flashdata('healthproblem_activate_success', $message);
+	        	redirect('admin/healthproblems');
+	        }
+
+	        $deactivate = $this->input->post('deactivate'); //to deactivate user
+	        if (isset($deactivate)) {
+	        	$this->admin_model->healthproblemDeactivate($id);
+	        	$message = 'Health problem status has been deactivated.';
+	        	$this->session->set_flashdata('healthproblem_deactivate_success', $message);
+	        	redirect('admin/healthproblems');
+	        }
+
+	    } else {
+	    	redirect('admin/login');    
+	    }
+	}
+
+
+	public function deletehealthproblem()
+	{
+		if($this->session->userdata('adminid') != ''):
+
+			$id = $this->input->post('id');
+			$healthProblemDel = $this->admin_model->healthProblemDel($id);
+
+			if ($healthProblemDel) {
+				$message = 'A health problem has been deleted.';
+				$this->session->set_flashdata('healthproblem_delete_success', $message);
+				redirect('admin/healthproblems');
+
+			} else {
+				$message = 'Failed to delete health problem.';
+				$this->session->set_flashdata('healthproblem_delete_fail', $message);
+				redirect('admin/healthproblems');
+			}
+
+		else:   
+			redirect('admin/login');    
+		endif;
+	}
+
+
+
+	public function edithealthproblem()
+	{
+		// echo "here";exit;
+		if($this->session->userdata('adminid') != ''):
+
+			if (isset($_POST['edithealthproblem-btn'])) {
+
+				$id = $this->input->post('id');
+				// echo $id;exit;
+
+				$name 			= $this->input->post('name');
+				$slug 			= $this->input->post('slug');
+				$description 	= $this->input->post('description');
+
+				$data = array(
+					'NAME'			=> $name,
+					'SLUG'		  	=> $slug,
+					'DESCRIPTION'	=> $description
+				);
+
+				$updateHealthProblem = $this->admin_model->updateHealthProblem($data, $id);
+
+				if ($updateHealthProblem) {
+					$message = 'A health problem has been updated.';
+					$this->session->set_flashdata('healthproblem_update_success', $message);
+					redirect('admin/healthproblems');
+
+				} else {
+					$message = 'Failed to update health problem.';
+					$this->session->set_flashdata('healthproblem_update_fail', $message);
+					redirect('admin/healthproblems');    		
+				}
+
+			} else {
+
+				$id = $this->uri->segment(3);
+
+				self::$viewData['full_title'] = "Admin | Update Health Problem";
+				self::$viewData['breadcrumb'] = "Update Health Problem"; 
+
+				self::$viewData['gethealthproblem'] = $this->admin_model->getHealthProblemById($id);
+				self::$viewData['page'] = "admin/edithealthproblem";
+				$this->load->view(TEMPADMIN, self::$viewData);
+
+			}
+
+		else:   
+			redirect('admin/login');    
+		endif;
+	}
+
+
+
+
 
 
 
