@@ -55,7 +55,7 @@
 								<div class="control-group">
 									<div class="form-group">
 										<label>Description</label>
-										<textarea name="description"  id="description" class="form-control" value="<?php echo $gethealthproblem->DESCRIPTION ?>"></textarea>
+										<textarea name="description"  id="description" class="form-control"><?php echo $gethealthproblem->DESCRIPTION ?></textarea>
 									</div>
 								</div>
 

@@ -156,7 +156,7 @@ class Site_model extends CI_Model {
 
     public function getSpecialistById($specialistid)
     {
-        $where = array('ID' => $specialistid);
+        $where = array('ID' => $specialistid, 'ADMIN_TYPE' => 2);
         $result = $this->db->get_where('tbl_admin_detail', $where);
 
         if ($result->num_rows() == 1) {
@@ -263,8 +263,9 @@ class Site_model extends CI_Model {
 
     public function getHealthProblems()
     {
+        $where = array('STATUS' => 1);
         $this->db->order_by('NAME', 'ASC');
-        return $this->db->get('tbl_health_problems')->result();
+        return $this->db->get_where('tbl_health_problems', $where)->result();
     }
 
 
@@ -273,4 +274,22 @@ class Site_model extends CI_Model {
         $where = array('ID' => $id);
         return $this->db->get_where('tbl_health_problems', $where)->row();
     }
+
+
+    public function getMedicinalProduct()
+    {
+        $where = array('STATUS' => 1);
+        $this->db->order_by('NAME', 'ASC');
+        return $this->db->get_where('tbl_medicinal_product', $where)->result();
+    }
+
+    public function getMedicinalProductById($id)
+    {
+        $where = array('ID' => $id);
+        return $this->db->get_where('tbl_medicinal_product', $where)->row();
+    }
+
+
+
+
 }

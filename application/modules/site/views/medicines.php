@@ -79,17 +79,14 @@
 							<input type="text" id="myMedicineInput" onkeyup="myFunction()" placeholder="Search for medicine names" title="Type in a name">
 
 							<ul id="myMedicineUL">
-								<li><a href="#">Adele</a></li>
-								<li><a href="#">Agnes</a></li>
-								<li><a href="#">Billy</a></li>
-								<li><a href="#">Bob</a></li>
-								<li><a href="#">Calvin</a></li>
-								<li><a href="#">Christina</a></li>
-								<li><a href="#">Cindy</a></li>
+								<?php foreach($getmedicinalproduct as $medicinalproduct): ?>
+									<li><a href="#" id="medicinalproduct-list" data-id="<?php echo $medicinalproduct->ID ?>"><?php echo $medicinalproduct->NAME; ?></a></li>
+								<?php endforeach; ?>
 							</ul>
 
 							<script>
 								function myFunction() {
+
 									var input, filter, ul, li, a, i;
 									input = document.getElementById("myMedicineInput");
 									filter = input.value.toUpperCase();
@@ -104,6 +101,8 @@
 
 										}
 									}
+
+									
 								}
 							</script>
 
@@ -111,10 +110,8 @@
 
 						</div>
 
-						<div class="col-md-9 col-sm-9 tab-info">
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+						<div class="col-md-9 col-sm-9 tab-info"  id="medicinalcontent" style="margin-top: 7px">
+							<div class="loader mx-auto" id="loading"></div>
 						</div>
 						<div class="clearfix"></div>
 
@@ -183,6 +180,50 @@
 	         	success : function(resp) {
 	         		if(resp.status == 'success'){
 	         			$("#healthproblemcontent").html(resp.data);
+	         		}
+	         	}
+
+	         })
+	     });
+
+
+
+	});
+
+
+	$(document).ready(function() {
+
+		
+
+		$(document).ajaxStart(function(){  //For loader 
+			$('#loading').show();
+		}).ajaxStop(function(){
+			$('#loading').hide();
+		})
+
+		$('#medicalproduct-tab').on('click', function(){
+			$("#medicinalproduct-list").trigger("click");
+		});
+
+
+		$(document).off("click", "#medicinalproduct-list").on("click", "#medicinalproduct-list", function(e){
+			e.preventDefault();
+	         
+	         var title = $(this).text();
+	         var id  = $(this).data('id');
+	         // alert(id);
+	         var url = "<?php echo base_url('site/medicinalproductdata') ?>";
+
+	         $.ajax({
+	         	type : "post",
+	         	url  : url,
+	         	cache: true,
+	         	data : {"id" : id, "title" : title},
+	         	dataType : "json",
+
+	         	success : function(resp) {
+	         		if(resp.status == 'success'){
+	         			$("#medicinalcontent").html(resp.data);
 	         		}
 	         	}
 

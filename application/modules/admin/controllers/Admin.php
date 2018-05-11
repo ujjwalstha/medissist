@@ -113,7 +113,9 @@ class Admin extends MX_Controller {
 			self::$viewData['specialistCount'] = $this->admin_model->specialistCount();
 			self::$viewData['forumQuestionCount'] = $this->admin_model->forumQuestionCount();
 			self::$viewData['forumAnswerCount'] = $this->admin_model->forumAnswerCount();
-			self::$viewData['specialistTypeCount'] = $this->admin_model->specialistTypeCount(); 
+			self::$viewData['specialistTypeCount'] = $this->admin_model->specialistTypeCount();
+			self::$viewData['healthProblemCount'] = $this->admin_model->healthProblemCount(); 
+			self::$viewData['medicinalProductCount'] = $this->admin_model->medicinalProductCount();  
 
 			self::$viewData['page'] = "admin/adminpanel";
 			$this->load->view(TEMPADMIN, self::$viewData);
@@ -126,10 +128,16 @@ class Admin extends MX_Controller {
 
 	public function settings()
 	{
-		self::$viewData['full_title'] = "Admin | Settings";
-		self::$viewData['breadcrumb'] = "Settings"; 
-		self::$viewData['page'] = "admin/settings";
-		$this->load->view(TEMPADMIN, self::$viewData);
+		if($this->session->userdata('adminid') != ''):
+
+			self::$viewData['full_title'] = "Admin | Settings";
+			self::$viewData['breadcrumb'] = "Settings"; 
+			self::$viewData['page'] = "admin/settings";
+			$this->load->view(TEMPADMIN, self::$viewData);
+
+		else:   
+			redirect('admin/login');    
+		endif;
 	}
 
 
@@ -225,24 +233,30 @@ class Admin extends MX_Controller {
 
 			if ($this->upload->do_upload('image')) {  
 
-				$upload_data 	=	$this->upload->data();
-				$imagename 		=	$upload_data['file_name'];
+				$upload_data 		=	$this->upload->data();
+				$imagename 			=	$upload_data['file_name'];
 
-				$name 			=	$this->input->post('name');
-				$slug 			=	$this->input->post('slug');
-				$email 			= 	$this->input->post('email');
-				$password 		= 	$this->input->post('password');
-				$specialisttype =	$this->input->post('specialisttype');
+				$name 				=	$this->input->post('name');
+				$slug 				=	$this->input->post('slug');
+				$email 				= 	$this->input->post('email');
+				$password 			= 	$this->input->post('password');
+				$specialisttype 	=	$this->input->post('specialisttype');
+				$qualification 		= 	$this->input->post('qualification');
+				$pastaffiliation 	= 	$this->input->post('pastaffiliation');
+				$membership 		= 	$this->input->post('membership');
 
 
 				$data = array(
-					'NAME'				=>	$name,
-					'SLUG'				=>	$slug,
-					'USERNAME'			=>	$email,
-					'PASSWORD'			=>	sha1($password),
-					'ADMIN_TYPE'		=>	2,
-					'SPECIALIST_TYPE'	=>	$specialisttype,
-					'IMAGE'				=>	$imagename,
+					'NAME'					=>	$name,
+					'SLUG'					=>	$slug,
+					'USERNAME'				=>	$email,
+					'PASSWORD'				=>	sha1($password),
+					'ADMIN_TYPE'			=>	2,
+					'SPECIALIST_TYPE'		=>	$specialisttype,
+					'QUALIFICATION'			=>	$qualification,
+					'PAST_AFFILIATION'		=>	$pastaffiliation,
+					'OVERALL_MEMBERSHIP'	=>	$membership,
+					'IMAGE'					=>	$imagename,
 				);
 
 				$addspecialist = $this->admin_model->addspecialist($data);
@@ -264,6 +278,160 @@ class Admin extends MX_Controller {
 				print_r($error);
 
 			}
+
+		else:   
+			redirect('admin/login');    
+		endif;
+	}
+
+
+	public function editspecialist()
+	{
+		// echo "here";exit;
+		if($this->session->userdata('adminid') != ''):
+
+			if (isset($_POST['editspecialist-btn'])) {
+
+				$id = $this->input->post('id');
+
+				$name 				= $this->input->post('name');
+				$slug 				= $this->input->post('slug');
+				$email 				= $this->input->post('email');
+				$specialisttype 	= $this->input->post('specialisttype');
+				$qualification 		= $this->input->post('qualification');
+				$pastaffiliation 	= $this->input->post('pastaffiliation');
+				$membership 		= $this->input->post('membership');
+				// echo $specialisttype;exit;
+
+				$data = array(
+					'NAME'					=>	$name,
+					'SLUG'					=>	$slug,
+					'USERNAME'				=>	$email,
+					'SPECIALIST_TYPE'		=>	$specialisttype,
+					'QUALIFICATION'			=>	$qualification,
+					'PAST_AFFILIATION'		=>	$pastaffiliation,
+					'OVERALL_MEMBERSHIP'	=>	$membership,
+					'UPDATED_DATE'			=> date('Y-m-d H:i:s'),
+				);
+
+				$updateSpecialist = $this->admin_model->updateSpecialist($data, $id);
+
+				if ($updateSpecialist) {
+					$message = 'Specialist detail has been updated.';
+					$this->session->set_flashdata('editspecialist_success', $message);
+					redirect('admin/editspecialist/'.$id);
+
+				} else {
+					$message = 'Failed to update specialist detail.';
+					$this->session->set_flashdata('editspecialist_fail', $message);
+					redirect('admin/editspecialist/'.$id);    		
+				}
+
+			} else {
+
+				$typeid = $this->uri->segment(3);
+
+				self::$viewData['full_title'] = "Admin | Manage Specialist";
+				self::$viewData['breadcrumb'] = "Manage Specialist"; 
+
+				self::$viewData['specialistbyid'] = $this->admin_model->getSpecialistById($typeid);
+				self::$viewData['page'] = "admin/editspecialist";
+				$this->load->view(TEMPADMIN, self::$viewData);
+
+			}
+
+		else:   
+			redirect('admin/login');    
+		endif;
+	}
+
+
+	public function changespecialistimage()
+	{
+		if($this->session->userdata('adminid') != ''):
+
+			$id = $this->input->post('id');
+
+			$config['upload_path']		= './uploads/images/specialists/';
+			$config['allowed_types']    = 'jpg|jpeg|png|gif|';  /**  All file type selected **/
+			$config['min_size']         = 50;
+			$config['max_size']         = 10000;
+			$config['min_width']        = 50;
+			$config['max_width']        = 100000;
+			$config['min_height']       = 50;
+			$config['max_height']       = 100000;
+
+			$this->upload->initialize($config);
+
+			if ($this->upload->do_upload('image')) {  
+
+				$upload_data 	=	$this->upload->data();
+				$imagename 		=	$upload_data['file_name'];
+
+				$data = array(
+					'IMAGE'	=>	$imagename,
+					'UPDATED_DATE'	=> date('Y-m-d H:i:s'),
+				);
+
+				$updateProfileImg = $this->admin_model->updateProfileImg($id, $data);
+
+				if ($updateProfileImg) {
+					$message = 'Specialist image has been updated.';
+					$this->session->set_flashdata('imageupdate_success', $message);
+					redirect('admin/editspecialist/'.$id);
+
+				} else {
+					$message = 'Failed to update specialist image.';
+					$this->session->set_flashdata('imageupdate_fail', $message);
+					redirect('admin/editspecialist/'.$id);
+				}  	
+
+			} else {
+
+				$error = array('error' => $this->upload->display_errors());
+				print_r($error);
+			}
+
+		else:   
+			redirect('admin/login');    
+		endif;  
+	}
+
+
+	public function changespecialistpassword()
+	{
+		if($this->session->userdata('adminid') != ''):
+
+			$id = $this->input->post('id');
+			$oldpassword = $this->input->post('oldpassword');
+			$checkSpecialistOldPassword = $this->admin_model->checkSpecialistOldPassword($oldpassword, $id);
+
+			if ($checkSpecialistOldPassword == true ) {
+
+				$newpassword = $this->input->post('newpassword');
+				$data = array(
+					'PASSWORD' 		=> sha1($newpassword),
+					'UPDATED_DATE'	=> date('Y-m-d H:i:s'),
+				);
+
+				$updateSpecialistPassword = $this->admin_model->updateSpecialistPassword($data, $id);
+
+				if ($updateSpecialistPassword) {
+					$message = 'Password updated successfully.';
+					$this->session->set_flashdata('passUpdate_success', $message);
+					redirect('admin/editspecialist/'.$id);
+
+				} else {
+					$message = 'Password update failed.';
+					$this->session->set_flashdata('passUpdate_fail', $message);
+					redirect('admin/editspecialist/'.$id);
+				}
+
+			} else {
+				$message = 'Old password did not match.';
+				$this->session->set_flashdata('passMatch_fail', $message);
+				redirect('admin/editspecialist/'.$id);
+			} 
 
 		else:   
 			redirect('admin/login');    
@@ -933,7 +1101,8 @@ class Admin extends MX_Controller {
 				$data = array(
 					'NAME'			=> $name,
 					'SLUG'		  	=> $slug,
-					'DESCRIPTION'	=> $description
+					'DESCRIPTION'	=> $description,
+					'UPDATED_ON'	=> date('Y-m-d H:i:s')
 				);
 
 				$updateHealthProblem = $this->admin_model->updateHealthProblem($data, $id);
@@ -958,6 +1127,162 @@ class Admin extends MX_Controller {
 
 				self::$viewData['gethealthproblem'] = $this->admin_model->getHealthProblemById($id);
 				self::$viewData['page'] = "admin/edithealthproblem";
+				$this->load->view(TEMPADMIN, self::$viewData);
+
+			}
+
+		else:   
+			redirect('admin/login');    
+		endif;
+	}
+
+
+
+	public function medicinalproduct()
+	{
+		if($this->session->userdata('adminid') != ''):
+
+			self::$viewData['full_title'] = "Admin | Medicinal Product";
+			self::$viewData['breadcrumb'] = "Medicinal Product"; 
+
+			self::$viewData['getmedicinalproduct'] = $this->admin_model->getMedicinalProduct();
+			self::$viewData['page'] = "admin/medicinalproduct";
+			$this->load->view(TEMPADMIN, self::$viewData);
+
+		else:   
+			redirect('admin/login');    
+		endif;
+	}
+
+
+	public function addmedicinalproduct()
+	{
+		if($this->session->userdata('adminid') != ''):
+
+			$name 			= $this->input->post('name');
+			$slug 			= $this->input->post('slug');
+			$description 	= $this->input->post('description');
+
+			$data = array(
+				'NAME'			=> $name,
+				'SLUG'		  	=> $slug,
+				'DESCRIPTION'	=> $description
+			);
+
+			$insertMedicinalProduct = $this->admin_model->insertMedicinalProduct($data);
+
+			if ($insertMedicinalProduct) {
+				$message = 'A medicinal product has been added.';
+				$this->session->set_flashdata('medicinalproduct_success', $message);
+				redirect('admin/medicinalproduct');
+
+			} else {
+				$message = 'Failed to add medicinal product.';
+				$this->session->set_flashdata('medicinalproduct_fail', $message);
+				redirect('admin/medicinalproduct');
+			}
+
+		else:   
+			redirect('admin/login');    
+		endif;
+	}
+
+
+	public function medicinalproductstatus()
+	{
+		if($this->session->userdata('adminid') != '') {
+
+			$id = $this->input->post('id');
+
+	        $activate = $this->input->post('activate'); //to activate user
+	        if (isset($activate)) {
+	        	$this->admin_model->medicinalproductActivate($id);
+	        	$message = 'A medicinal product status has been activated.';
+	        	$this->session->set_flashdata('medicinalproduct_success', $message);
+	        	redirect('admin/medicinalproduct');
+	        }
+
+	        $deactivate = $this->input->post('deactivate'); //to deactivate user
+	        if (isset($deactivate)) {
+	        	$this->admin_model->medicinalproductDeactivate($id);
+	        	$message = 'A medicinal product status has been deactivated.';
+	        	$this->session->set_flashdata('medicinalproduct_fail', $message);
+	        	redirect('admin/medicinalproduct');
+	        }
+
+	    } else {
+	    	redirect('admin/login');    
+	    }
+	}
+
+
+	public function deletemedicinalproduct()
+	{
+		if($this->session->userdata('adminid') != ''):
+
+			$id = $this->input->post('id');
+			$medicinalproductDel = $this->admin_model->medicinalproductDel($id);
+
+			if ($medicinalproductDel) {
+				$message = 'A medicinal product has been deleted.';
+				$this->session->set_flashdata('medicinalproduct_success', $message);
+				redirect('admin/medicinalproduct');
+
+			} else {
+				$message = 'Failed to delete medicinal product.';
+				$this->session->set_flashdata('medicinalproduct_fail', $message);
+				redirect('admin/medicinalproduct');
+			}
+
+		else:   
+			redirect('admin/login');    
+		endif;
+	}
+
+
+	public function editmedicinalproduct()
+	{
+		// echo "here";exit;
+		if($this->session->userdata('adminid') != ''):
+
+			if (isset($_POST['editmedicinalproduct-btn'])) {
+
+				$id = $this->input->post('id');
+				// echo $id;exit;
+
+				$name 			= $this->input->post('name');
+				$slug 			= $this->input->post('slug');
+				$description 	= $this->input->post('description');
+
+				$data = array(
+					'NAME'			=> $name,
+					'SLUG'		  	=> $slug,
+					'DESCRIPTION'	=> $description,
+					'UPDATED_ON'	=> date('Y-m-d H:i:s')
+				);
+
+				$updateMedicinalProduct = $this->admin_model->updateMedicinalProduct($data, $id);
+
+				if ($updateMedicinalProduct) {
+					$message = 'A medicinal product has been updated.';
+					$this->session->set_flashdata('medicinalproduct_success', $message);
+					redirect('admin/medicinalproduct');
+
+				} else {
+					$message = 'Failed to update medicinal product.';
+					$this->session->set_flashdata('medicinalproduct_fail', $message);
+					redirect('admin/medicinalproduct');    		
+				}
+
+			} else {
+
+				$id = $this->uri->segment(3);
+
+				self::$viewData['full_title'] = "Admin | Update Medicinal Product";
+				self::$viewData['breadcrumb'] = "Update Medicinal Product"; 
+
+				self::$viewData['getmedicinalproduct'] = $this->admin_model->getMedicinalProductById($id);
+				self::$viewData['page'] = "admin/editmedicinalproduct";
 				$this->load->view(TEMPADMIN, self::$viewData);
 
 			}

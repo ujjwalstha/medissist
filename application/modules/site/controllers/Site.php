@@ -416,6 +416,7 @@ class Site extends MX_Controller {
 
 			self::$viewData['title'] = 'Medissist | Health Care and Medicines';
 			self::$viewData['gethealthproblems'] = $this->site_model->getHealthProblems();
+			self::$viewData['getmedicinalproduct'] = $this->site_model->getMedicinalProduct();
 			self::$viewData['page'] = 'site/medicines';
 			$this->load->view(TEMPPATH, self::$viewData);
 
@@ -533,5 +534,63 @@ class Site extends MX_Controller {
     	} else {
     		exit("No direct script allowed");
     	}
+    }
+
+
+    public function medicinalproductdata()
+    {
+    	if ($this->input->is_ajax_request()) {
+
+    		try {
+    			$id 	= $this->input->post('id');
+    			$title 	= $this->input->post('title');
+    			// echo $specialisttype; exit;
+
+    			$data['title'] 					= $title;
+    			$data['getmedicinalproduct'] 	= $getMedicinalProductById = $this->site_model->getMedicinalProductById($id);
+    			// $data['eventCount'] = count($getEvents);
+
+    			//var_dump($data['eventCount']);exit;
+    			$view = $this->load->view('site/medicinalproductcontent', $data, TRUE);
+
+    			// var_dump($view);exit;
+
+    			$response = array(
+    				'status' => 'success',
+    				'data'	 =>	$view
+    			);
+
+    		} catch (Exception $e) {
+    			$response = array(
+    				'status' 	=> 'error',
+    				'message'	=> $e->getMessage()	
+    			);
+    		} 
+
+    		header("Content-Type: application/json");
+    		echo json_encode($response);
+
+    	} else {
+    		exit("No direct script allowed");
+    	}
+    }
+
+
+    public function specialistprofile()
+    {
+    	if($this->session->userdata('userid') != ''):
+
+    		$id = $this->uri->segment(3);
+    		// echo $id;exit;
+
+			self::$viewData['title'] = 'Medissist | Health Specialist Profile';
+			self::$viewData['specialist'] = $this->site_model->getSpecialistById($id);
+		
+			self::$viewData['page'] = 'site/specialistprofile';
+			$this->load->view(TEMPPATH, self::$viewData);
+
+		else:   
+            redirect(base_url());    
+        endif;
     }
 }

@@ -92,6 +92,28 @@
                     </div>
 
 
+                    <div class="control-group">
+                      <div class="form-group  ">
+                        <label>Qualification</label>
+                        <textarea name="qualification"  id="qualification" class="form-control"></textarea>
+                      </div>
+                    </div>
+
+                    <div class="control-group">
+                      <div class="form-group  ">
+                        <label>Past Affilication</label>
+                        <textarea name="pastaffiliation"  id="pastaffiliation" class="form-control"></textarea>
+                      </div>
+                    </div>
+
+                    <div class="control-group">
+                      <div class="form-group  ">
+                        <label>Overall Membership</label>
+                        <textarea name="membership"  id="membership" class="form-control"></textarea>
+                      </div>
+                    </div>
+
+
 
                     <div class="control-group">
                       <div class="form-group ">
@@ -165,12 +187,7 @@
                     </div>
                   <?php endif; ?>
 
-                  <?php if ($this->session->flashdata('passMatch_fail')): ?>
-                    <div class="alert alert-danger"  style="font-size: 14px; text-align: center;">
-                      <i class="fa fa-times-circle"></i>
-                      <?php echo $this->session->flashdata('passMatch_fail') ?>
-                    </div>
-                  <?php endif; ?>
+                  
                 </div>
 
                 <div class="col-md-4"></div>
@@ -183,14 +200,18 @@
                 <table id="myTable" class="table">
                   <thead>
                     <tr>
-                      <th>S.N</th>
-                      <th>Name</th>
-                      <th>Username</th>
-                      <th>Specialist Type</th>
-                      <th>Image</th>
-                      <th>Online Status</th>
-                      <th>Status</th>  
-                      <th>Action</th>
+                      <th nowrap>S.N</th>
+                      <th nowrap>Name</th>
+                      <th nowrap>Username</th>
+                      <th nowrap>Specialist Type</th>
+                      <th nowrap>Qualification</th>
+                      <th nowrap>Past Affiliation</th>
+                      <th nowrap>Membership</th>
+                      <th nowrap>Image</th>
+                      <th nowrap>Online Status</th>
+                      <th nowrap>Status</th>  
+                      <th nowrap>Edit</th>
+                      <th nowrap>Delete</th>
                     </tr>
                   </thead>
 
@@ -204,10 +225,13 @@
                         ?>
 
                         <tr>
-                          <td><?php echo $i++; ?></td>
-                          <td><?php echo $specialist->NAME; ?></td>
-                          <td><?php echo $specialist->USERNAME; ?></td>
-                          <td><?php echo $specialist->SPECIALIST_TYPE; ?></td>
+                          <td nowrap><?php echo $i++; ?></td>
+                          <td nowrap><?php echo $specialist->NAME; ?></td>
+                          <td nowrap><?php echo $specialist->USERNAME; ?></td>
+                          <td nowrap><?php echo $specialist->SPECIALIST_TYPE; ?></td>
+                          <td><?php echo $specialist->QUALIFICATION ? $specialist->QUALIFICATION : '-'; ?></td>
+                          <td><?php echo $specialist->PAST_AFFILIATION ? $specialist->PAST_AFFILIATION : '-' ?></td>
+                          <td><?php echo $specialist->PAST_AFFILIATION ? $specialist->OVERALL_MEMBERSHIP : '-' ?></td>
                           <td><img src="<?php echo base_url().'uploads/images/specialists/'.$specialist->IMAGE ?>" style="height: 70px; width: 70px"></td>
                           <td><?php echo ($specialist->ONLINE_STATUS == 1) ? '<i class="fa fa-circle text-success"></i> Online' : '<i class="fa fa-circle text-danger"></i> Offline'; ?></td>
 
@@ -229,6 +253,12 @@
 
                               <?php echo form_close(); ?>
                             </td>
+
+                            <td>
+                              <a href="<?php echo base_url().'admin/editspecialist/'.$specialist->ID ?>"><button type="submit" class="btn btn-warning btn-xs" id="editBtn" name="editBtn"><span class="fa fa-edit"></span>
+                              </button></a>
+                            </td>
+
                             <td>
 
                               <?php 

@@ -1641,8 +1641,8 @@ ol {
     width: 100%;
 }
 /* Shuffle and sort controls */
-select {
-    padding: 1rem 1rem;
+select#specialisttype {
+    padding: 14px 14px;
 }
 .sortandshuffle .shuffle-btn {
     background-color: #dec800;
@@ -3737,5 +3737,40 @@ h1#main-nav-title {
 #healthproblemdesc{
     color: #777777;
 }
+
+.strong-th {
+    font-weight: bold;
+}
+
+
+
+/*Google custom search bar*/
+
+.gsc-control-cse{
+    background-color: #23b5b9 !important;
+    border-color: #23b5b9 !important; 
+}
+
+.gsc-search-button-v2, .gsc-search-button-v2:hover, .gsc-search-button-v2:focus {
+    background-color: #e45753 !important;
+    border-color: #e45753 !important;
+    height: 42px !important;
+    border-top-left-radius: 0% !important;
+    border-bottom-left-radius: 0% !important;
+}
+
+input#gsc-i-id1.gsc-input{
+    padding-bottom: 4px !important;
+    height: 36px !important;
+}
+
+.gsc-search-button{
+    margin-left: -12px !important;
+}
+
+
+/*Google custom search bar ends here*/
+
+
 
 

@@ -7,7 +7,7 @@ if(is_array($getspecialist)) :
 
 		<div class="col-md-3 team_bottom-grid">
 			<div class="btm-right">
-				<a href="#" id="specialist-img"><img  src="<?php echo base_url().'uploads/images/specialists/'.$specialist->IMAGE ?>" alt=" " ></a>
+				<a href="<?php echo base_url().'site/specialistprofile/'.$specialist->ID ?>" id="specialist-img"><img  src="<?php echo base_url().'uploads/images/specialists/'.$specialist->IMAGE ?>" alt=" " style="max-height: 255px"></a>
 					<!-- <div class="captn-icon">
 						<ul>
 							<li><a class="fb" href="#"></a></li>
@@ -17,7 +17,7 @@ if(is_array($getspecialist)) :
 						</div> -->
 						<div class="captn">
 							<h4><?php echo $specialist->NAME; ?></h4>	
-							<h5>- <?php echo $specialist->SPECIALIST_TYPE; ?></h5><br>
+							<h5><?php echo $specialist->SPECIALIST_TYPE; ?></h5><br>
 							<h5>
 								<?php if($specialist->ONLINE_STATUS == 1): ?>
 									<i class="fa fa-circle text-success"></i> Online

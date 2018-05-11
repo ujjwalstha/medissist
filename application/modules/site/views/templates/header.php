@@ -17,25 +17,18 @@
 
 	<div class="header-middle">
 		<div class="header-search">
-			<form action="#" method="post">
-				<div class="search">
-					<input type="search" value="Search" name="search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}" required="">
-				</div>
-				<!-- <div class="section_room">
-					<select id="country" onchange="change_country(this.value)" class="frm-field required">
-						<option value="null">All Tests</option>
-						<option value="null">Blood Test</option>     
-						<option value="AX">Urine Test </option>
-						<option value="AX">Blood Volume Test</option>
-						<option value="AX">Normal Test</option>
-						<option value="AX">Body Scanning</option>
-					</select>
-				</div> -->
-				<div class="sear-sub">
-					<input type="submit" value=" ">
-				</div>
-				<div class="clearfix"></div>
-			</form>
+			<script>
+                  (function() {
+                    var cx = '009963616871025953509:qv85vwdzyo4';
+                    var gcse = document.createElement('script');
+                    gcse.type = 'text/javascript';
+                    gcse.async = true;
+                    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+                    var s = document.getElementsByTagName('script')[0];
+                    s.parentNode.insertBefore(gcse, s);
+                  })();
+                </script>
+                <gcse:search></gcse:search>
 		</div>
 	</div>
 

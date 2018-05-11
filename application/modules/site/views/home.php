@@ -15,7 +15,7 @@
 				<div class="slide active bg-1">
 					<div class="slide-container">
 						<div class="slide-content">
-							<p>Welcome to <span class="s-p">Medicinal</span>!</p>	
+							<p>Welcome to <span class="s-p">Medissist</span>!</p>	
 						</div>
 
 					</div>
@@ -23,7 +23,7 @@
 				<div class="slide bg-2">
 					<div class="slide-container">
 						<div class="slide-content">
-							<p>Lorem ipsum <span class="s-p">dolor</span> sit </p>	
+							<p>Welcome to <span class="s-p">Medissist</span>!</p>	
 
 						</div>
 					</div>				
@@ -31,7 +31,7 @@
 				<div class="slide bg-3">
 					<div class="slide-container">
 						<div class="slide-content">
-							<p>Welcome to <span class="s-p">Medicinal</span>!</p>	
+							<p>Welcome to <span class="s-p">Medissist</span>!</p>	
 
 						</div>
 					</div>				
@@ -39,7 +39,7 @@
 				<div class="slide bg-4">
 					<div class="slide-container">
 						<div class="slide-content">
-							<p>Lorem ipsum <span class="s-p">dolor</span> sit </p>		
+							<p>Welcome to <span class="s-p">Medissist</span>!</p>		
 
 						</div>
 					</div>				
@@ -47,7 +47,7 @@
 				<div class="slide bg-5">
 					<div class="slide-container">
 						<div class="slide-content">
-							<p>Welcome to <span class="s-p">Medicinal</span>!</p>	
+							<p>Welcome to <span class="s-p">Medissist</span>!</p>	
 
 						</div>
 					</div>				
@@ -115,19 +115,25 @@
 			</div>
 
 			<div class="inner_tabs">
-				<h2 class="tittle">Welcome to Medicinal</h2>
 				<p class="sub-para">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem  </p>
 
 				
 				<div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+
 					<ul id="myTab" class="nav nav-tabs" role="tablist">
 						<li role="presentation" class="active"><a href="#expeditions" id="expeditions-tab" role="tab" data-toggle="tab" aria-controls="expeditions" aria-expanded="true">Medical Surgery</a></li>
+
 						<li role="presentation"><a href="#tours" role="tab" id="tours-tab" data-toggle="tab" aria-controls="tours">Departments</a></li>
+
 						<li role="presentation"><a href="#tree" role="tab" id="tree-tab" data-toggle="tab" aria-controls="tree">Patient life</a></li>
+
 						<li role="presentation"><a href="#safari" role="tab" id="safari-tab" data-toggle="tab" aria-controls="safari">Baby Birth</a></li>
+
 						<li role="presentation"><a href="#trekking" role="tab" id="trekking-tab" data-toggle="tab" aria-controls="trekking">Lab Testing</a></li>
 					</ul>
+
 					<div id="myTabContent" class="tab-content">
+
 						<div role="tabpanel" class="tab-pane fade in active" id="expeditions" aria-labelledby="expeditions-tab">
 							<div class="col-md-5 col-sm-5 tab-image">
 								<img src="<?php echo base_url().'assets/images/4.jpg' ?>" alt="Medicinal">
@@ -137,6 +143,7 @@
 							</div>
 							<div class="clearfix"></div>
 						</div>
+
 						<div role="tabpanel" class="tab-pane fade" id="tours" aria-labelledby="tours-tab">
 							<div class="col-md-5 col-sm-5 tab-image">
 								<img src="<?php echo base_url().'assets/images/8.jpg' ?>" alt="Medicinal">
@@ -146,6 +153,7 @@
 							</div>
 							<div class="clearfix"></div>
 						</div>
+
 						<div role="tabpanel" class="tab-pane fade" id="tree" aria-labelledby="tree-tab">
 							<div class="col-md-5 col-sm-5 tab-image">
 								<img src="<?php echo base_url().'assets/images/5.jpg' ?>" alt="Medicinal">
@@ -155,6 +163,7 @@
 							</div>
 							<div class="clearfix"></div>
 						</div>
+
 						<div role="tabpanel" class="tab-pane fade" id="safari" aria-labelledby="safari-tab">
 							<div class="col-md-5 col-sm-5 tab-image">
 								<img src="<?php echo base_url().'assets/images/6.jpg' ?>" alt="Medicinal">
@@ -164,6 +173,7 @@
 							</div>
 							<div class="clearfix"></div>
 						</div>
+
 						<div role="tabpanel" class="tab-pane fade" id="trekking" aria-labelledby="trekking-tab">
 							<div class="col-md-5 col-sm-5 tab-image">
 								<img src="<?php echo base_url().'assets/images/7.jpg' ?>" alt="Medicinal">
@@ -173,6 +183,7 @@
 							</div>
 							<div class="clearfix"></div>
 						</div>
+
 					</div>
 				</div>
 			</div>

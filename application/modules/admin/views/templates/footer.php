@@ -93,6 +93,8 @@
 
 <script>
     CKEDITOR.replace('description');
+
+   
 </script>
 
 
@@ -111,6 +113,9 @@
   });
 
 </script>
+
+
+
 
 
 

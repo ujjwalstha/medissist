@@ -138,6 +138,61 @@ $(document).ready(function(){
 /** Add specialist validation ends here **/
 
 
+/** Edit specialist validation **/
+$(document).ready(function(){    
+  
+   $(document).off("click", "#editspecialist-btn").on("click", "#editspecialist-btn", function(){
+
+    $("form[name='editspecialist-form']").validate({
+      // Specify validation rules
+      rules: {
+       
+        name: {
+          required: true,
+        },
+        email: {
+          required: true,
+          email: true
+        },
+        password: {
+          required: true,
+          minlength: 6,
+        },
+        specialisttype: {
+          required: true,
+        },
+        
+        
+      },
+      // Specify validation error messages
+      messages: {
+        
+        name: {
+          required: "Please enter full name",
+        },
+        email: {
+          required: "Please enter email for username",
+          email: "Please enter a valid email address",
+        },
+        password: {
+          required: "Please enter password",
+          minlength: "Your password must be at least 6 characters long",
+        },
+        specialisttype: {
+          required: "Please enter specialist type",
+        },
+        
+      },
+      
+    });
+
+  });
+
+ });
+
+/** Edit specialist validation ends here **/
+
+
 /** Change profile image validation **/
 $(document).ready(function(){    
   
@@ -271,7 +326,7 @@ $(document).ready(function(){
 /** Edit specialist type validation ends here **/
 
 
-/** Add specialist type validation **/
+/** Add health problem validation **/
 $(document).ready(function(){
 
   $(document).off("click", "#addhealthproblems-btn").on("click", "#addhealthproblems-btn", function(){
@@ -306,7 +361,122 @@ $(document).ready(function(){
   });
 
 });
-/** Edit specialist type validation ends here **/
+/** Add health problem validation ends here **/
+
+
+
+/** Edit health problem validation **/
+$(document).ready(function(){
+
+  $(document).off("click", "#edithealthproblem-btn").on("click", "#edithealthproblem-btn", function(){
+
+    $("form[name='edithealthproblem']").validate({
+      // Specify validation rules
+      rules: {
+       
+        name: {
+          required: true,
+        },
+
+        description: {
+          required: true,
+        },
+        
+      },
+      // Specify validation error messages
+      messages: {
+        
+        name: {
+          required: "Please enter title",
+        },
+
+        description: {
+          required: "Please enter description",
+        },
+      },
+       
+    });
+
+  });
+
+});
+/** Edit health problem validation ends here **/
+
+
+/** Add Medicinal product validation **/
+$(document).ready(function(){
+
+  $(document).off("click", "#addmedicinalproduct-btn").on("click", "#addmedicinalproduct-btn", function(){
+
+    $("form[name='addmedicinalproduct']").validate({
+      // Specify validation rules
+      rules: {
+       
+        name: {
+          required: true,
+        },
+
+        description: {
+          required: true,
+        },
+        
+      },
+      // Specify validation error messages
+      messages: {
+        
+        name: {
+          required: "Please enter name",
+        },
+
+        description: {
+          required: "Please enter description",
+        },
+      },
+       
+    });
+
+  });
+
+});
+/** Add Medicinal product validation ends here **/
+
+
+/** Edit Medicinal product validation **/
+$(document).ready(function(){
+
+  $(document).off("click", "#editmedicinalproduct-btn").on("click", "#editmedicinalproduct-btn", function(){
+
+    $("form[name='editmedicinalproduct']").validate({
+      // Specify validation rules
+      rules: {
+       
+        name: {
+          required: true,
+        },
+
+        description: {
+          required: true,
+        },
+        
+      },
+      // Specify validation error messages
+      messages: {
+        
+        name: {
+          required: "Please enter title",
+        },
+
+        description: {
+          required: "Please enter description",
+        },
+      },
+       
+    });
+
+  });
+
+});
+/** Edit Medicinal product validation ends here **/
 
 
 

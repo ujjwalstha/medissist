@@ -21,7 +21,7 @@
 				<div class="header-search" style="width: 100%">
 					<form id="searchthis">
 						<div class="search">
-							<input type="search" value="Search for specialist name" name="search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}" required="" class="searchField">
+							<input type="search" value="Search for specialist name" name="search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search for specialist name';}" required="" class="searchField">
 						</div>
 
 						<div class="sear-sub">

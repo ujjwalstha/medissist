@@ -46,6 +46,21 @@ class Admin_model extends CI_Model {
     }
 
 
+    public function checkSpecialistOldPassword($oldpassword, $id)
+    {
+        $where = array('PASSWORD' => sha1($oldpassword), 'ID' => $id, 'ADMIN_TYPE' => 2);
+        $this->db->where($where);
+        $result = $this->db->get('tbl_admin_detail');
+
+        if ($result->num_rows() == 1) {
+            return true;
+
+        } else {
+            return false;
+        }
+    }
+
+
     public function updatePassword($data)
     {
         $id = $this->session->userdata('adminid');
@@ -54,6 +69,12 @@ class Admin_model extends CI_Model {
         return $this->db->update('tbl_admin_detail', $data);
     }
 
+    public function updateSpecialistPassword($data, $id)
+    {
+        $where  = array('ID' => $id, 'ADMIN_TYPE' => 2);
+        $this->db->where($where);
+        return $this->db->update('tbl_admin_detail', $data);
+    }
 
     public function userCount()
     {
@@ -80,6 +101,16 @@ class Admin_model extends CI_Model {
     public function specialistTypeCount()
     {
         return $this->db->count_all_results('tbl_specialist_type');
+    }
+
+    public function healthProblemCount()
+    {
+        return $this->db->count_all_results('tbl_health_problems');
+    }
+
+    public function medicinalProductCount()
+    {
+        return $this->db->count_all_results('tbl_medicinal_product');
     }
 
 
@@ -373,6 +404,29 @@ class Admin_model extends CI_Model {
     }
 
 
+    public function getSpecialistById($specialistid)
+    {
+        $where = array('ID' => $specialistid, 'ADMIN_TYPE' => 2);
+        $result = $this->db->get_where('tbl_admin_detail', $where);
+
+        if ($result->num_rows() == 1) {
+            return $result->row();
+
+        } else {
+            return false;
+        }
+    }
+
+
+    public function updateSpecialist($data, $id)
+    {
+        // echo $typeid;exit;
+        $where = array('ID' => $id, 'ADMIN_TYPE' => 2);
+        $this->db->where($where);
+        return $this->db->update('tbl_admin_detail', $data);
+    }
+
+
     public function insertSpecialistType($data)
     {
         return $this->db->insert('tbl_specialist_type', $data);
@@ -389,6 +443,8 @@ class Admin_model extends CI_Model {
         $where = array('TYPEID' => $typeid);
         return $this->db->get_where('tbl_specialist_type', $where)->row();
     }
+
+    
 
 
     public function specialistTypeDel($id)
@@ -411,7 +467,7 @@ class Admin_model extends CI_Model {
         return $this->db->insert('tbl_health_problems', $data);
     }
 
-     public function getHealthProblems()
+    public function getHealthProblems()
     {
         return $this->db->get('tbl_health_problems')->result();
     }
@@ -451,5 +507,55 @@ class Admin_model extends CI_Model {
         $this->db->where($where);
         return $this->db->update('tbl_health_problems', $data);
     }
+
+
+    public function insertMedicinalProduct($data)
+    {
+        return $this->db->insert('tbl_medicinal_product', $data);
+    }
+
+
+    public function getMedicinalProduct()
+    {
+        return $this->db->get('tbl_medicinal_product')->result();
+    }
+
+    public function medicinalproductActivate($id)
+    {
+        $this->db->set('STATUS', '1');
+        $this->db->where('ID', $id);
+        $this->db->update('tbl_medicinal_product');
+    }
+
+
+    public function medicinalproductDeactivate($id)
+    {
+        $where = array('ID' => $id);
+        $this->db->set('STATUS', '0');
+        $this->db->where($where);
+        $this->db->update('tbl_medicinal_product');
+    }
+
+    public function medicinalproductDel($id)
+    {
+        $this->db->where('ID', $id);
+        return $this->db->delete('tbl_medicinal_product');
+    }
+
+
+    public function getMedicinalProductById($id)
+    {
+        $where = array('ID' => $id);
+        return $this->db->get_where('tbl_medicinal_product', $where)->row();
+    }
+
+
+    public function updateMedicinalProduct($data, $id)
+    {
+        $where = array('ID' => $id);
+        $this->db->where($where);
+        return $this->db->update('tbl_medicinal_product', $data);
+    }
+
 
 }

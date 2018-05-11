@@ -89,6 +89,8 @@
 
 				<li><a href="<?php echo base_url().'admin/healthproblems' ?>"><i class="fa fa-heartbeat text-red"></i> <span>Health Problems</span></a></li>
 
+				<li><a href="<?php echo base_url().'admin/medicinalproduct' ?>"><i class="fa fa-medkit text-green"></i> <span>Medicinal Products</span></a></li>
+
 				<li class="treeview">
 					<a href="#">
 						<i class="fa fa-group text-orange"></i> <span>Manage Forum</span>
