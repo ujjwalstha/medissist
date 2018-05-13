@@ -298,5 +298,21 @@
 
 
 
+    <script type="text/javascript" src="<?php echo base_url().'assets/ckeditor/ckeditor.js' ?>"> </script>
+
+<script>
+  
+   CKEDITOR.replace( 'qualification' );
+  
+
+    CKEDITOR.replace( 'pastaffiliation' );
+    CKEDITOR.add
+
+    CKEDITOR.replace( 'membership' );
+    CKEDITOR.add     
+</script>
+
+
+
 
 

@@ -481,6 +481,150 @@ $(document).ready(function(){
 
 
 
+/** Edit User profile validation **/
+$(document).ready(function(){
+
+  $(document).off("click", "#editprofile-btn").on("click", "#editprofile-btn", function(){
+
+    $("form[name='profile-form']").validate({
+      // Specify validation rules
+      rules: {
+       
+        firstname: {
+          required: true,
+        },
+
+        lastname: {
+          required: true,
+        },
+
+        email: {
+          required: true,
+          email: true
+        },
+
+        gender: {
+          required: true,
+        },
+        
+      },
+      // Specify validation error messages
+      messages: {
+        
+        firstname: {
+          required: "Please enter first name",
+        },
+
+        lastname: {
+          required: "Please enter last name",
+        },
+
+        email: {
+          required: "Please enter email",
+          email: "Please enter a valid email address",
+        },
+
+        gender: {
+          required: "Please enter gender",
+        },
+      },
+       
+    });
+
+  });
+
+});
+/** Edit User profile validation ends here **/
+
+
+/** Admin dashboard change password validation **/
+
+$(document).ready(function(){    
+  
+   $(document).off("click", "#changepassword-btn").on("click", "#changepassword-btn", function(){
+
+    $("form[name='changepassword-form']").validate({
+      // Specify validation rules
+      rules: {
+       
+        oldpassword: {
+          required: true,
+        },
+        newpassword: {
+          required: true,
+          minlength: 6,
+        },
+        confirmpassword: {
+          required: true,
+          equalTo: "#newpassword",
+        }
+      },
+      // Specify validation error messages
+      messages: {
+        
+        oldpassword: {
+          required: "Please enter your old password",
+        },
+        newpassword: {
+          required: "Please enter new password",
+          minlength: "Your password must be at least 6 characters long",
+        },
+        confirmpassword: {
+          required: "Please enter confirm password",
+          equalTo: "New password and confirm password does not match",
+        }
+      },
+      
+    });
+
+  });
+
+ });
+
+/** Admin dashboard change password validation ends here **/
+
+
+
+/** Edit Medicinal product validation **/
+$(document).ready(function(){
+
+  $(document).off("click", "#feedback-btn").on("click", "#feedback-btn", function(){
+
+    $("form[name='feedback-form']").validate({
+      // Specify validation rules
+      rules: {
+       
+        subject: {
+          required: true,
+        },
+
+        message: {
+          required: true,
+        },
+        
+      },
+      // Specify validation error messages
+      messages: {
+        
+        subject: {
+          required: "Please enter subject",
+        },
+
+        message: {
+          required: "Please enter message",
+        },
+      },
+       
+    });
+
+  });
+
+});
+/** Edit Medicinal product validation ends here **/
+
+
+
+
 
 
 

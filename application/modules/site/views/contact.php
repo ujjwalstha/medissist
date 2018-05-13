@@ -9,45 +9,72 @@
  <!--/contact-->		
  <div class="contact-top">
  	<div class="container">
- 		<div class="contact-text">
- 			<div class="con-text">
- 				<p><a href="mailto:info.medissist@gmail.com"> info.medissist@gmail.com</a></p>
- 				<p> +977 9841 234567</p>
- 				<h6> Thapathali, Kathmandu Nepal</h6>
- 			</div>
- 		</div>
+ 		
  		<div class="contact-form">
- 			<form method="post" action="#">
- 				<div class="col-md-5">
- 					<div>
- 						<span><label>NAME</label></span>
- 						<span><input name="userName" type="text" class="textbox" required></span>
+ 			
+ 			<div class="col-md-4">
+
+
+
+ 				<?php if ($this->session->flashdata('feedback_success')): ?>
+ 					<div class="alert alert-success" style="font-size: 14px; text-align: center;">
+ 						<i class="fa fa-check-circle"></i>
+ 						<?php echo $this->session->flashdata('feedback_success') ?>
  					</div>
- 					<div>
- 						<span><label>E-MAIL</label></span>
- 						<span><input name="userEmail" type="text" class="textbox" required></span>
- 					</div>
- 					<div>
- 						<span><label>SUBJECT</label></span>
- 						<span><input name="userPhone" type="text" class="textbox" required></span>
- 					</div>
+ 				<?php endif; ?>
+
+ 				
+
+ 				<?php 
+ 				$attributes = array('id' => 'feedback-form', 'method' => 'post', 'name' => 'feedback-form');
+ 				echo form_open('site/sendfeedback', $attributes);
+ 				?>
+
+ 				<div>
+ 					<span><label>SUBJECT</label></span>
+ 					<span><input name="subject" type="text" id="subject" class="textbox" required></span>
  				</div>
 
- 				<div class="col-md-1">
+ 				<div>					    	
+ 					<span><label>MESSAGE</label></span>
+ 					<span><textarea name="message" id="message"> </textarea></span>
  				</div>
 
- 				<div class="col-md-6">
- 					<div>					    	
- 						<span><label>MESSAGE</label></span>
- 						<span><textarea name="userMsg" required> </textarea></span>
- 					</div>
- 					<div>
- 						<span><input type="submit" value="Submit" class="myButton"></span>
- 					</div>
+ 				<div>
+ 					<span><input type="submit" value="SEND" class="myButton" name="feedback-btn" id="feedback-btn"></span>
  				</div>
- 			</form>
- 			<div class="clearfix"></div>
- 		</div>
+
+ 				<?php echo form_close(); ?>
+ 			</div>
+
+ 			<div class="col-md-1">
+ 			</div>
+
+ 			<div class="col-md-7" style="margin-top: 5px">
+
+ 				<div id="map"></div>
+
+ 				<script>
+ 					function initMap() {
+ 						var uluru = {lat: 27.6894, lng: 85.3227};
+ 						var map = new google.maps.Map(document.getElementById('map'), {
+ 							zoom: 14,
+ 							center: uluru
+ 						});
+ 						var marker = new google.maps.Marker({
+ 							position: uluru,
+ 							map: map
+ 						});
+ 					}
+ 				</script>
+
+ 				<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATQ1kRnLN9LU0ajAZJbCrBmakbhruQvas&callback=initMap">
+ 				</script>	
+
+ 			</div>
+ 		</form>
+ 		<div class="clearfix"></div>
  	</div>
  </div>
- <!--//contact-->	
+</div>
+<!--//contact-->	

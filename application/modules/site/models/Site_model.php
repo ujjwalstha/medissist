@@ -154,6 +154,19 @@ class Site_model extends CI_Model {
         }
     }
 
+    public function getspecialistsaying()
+    {
+        $where = array('ADMIN_TYPE' => 2, 'STATUS' => 1, 'PATIENT_MSG IS NOT NULL');
+        $result = $this->db->get_where('tbl_admin_detail', $where);
+
+        if ($result->num_rows() > 0) {
+            return $result->result();
+
+        } else {
+            return false;
+        }
+    }
+
     public function getSpecialistById($specialistid)
     {
         $where = array('ID' => $specialistid, 'ADMIN_TYPE' => 2);
@@ -181,7 +194,8 @@ class Site_model extends CI_Model {
         $data = array(
             'NAME'      => $fullname,
             'USER_TYPE' => "user",
-            'MESSAGE'   => $message
+            'MESSAGE'   => $message,
+            'CREATED'   => date('Y-m-d H:i:s')
         );
 
         return $this->db->insert($table, $data);
@@ -289,6 +303,62 @@ class Site_model extends CI_Model {
         return $this->db->get_where('tbl_medicinal_product', $where)->row();
     }
 
+    public function updateprofile($data, $id)
+    {
+        // echo $typeid;exit;
+        $where = array('ID' => $id);
+        $this->db->where($where);
+        return $this->db->update('tbl_user_detail', $data);
+    }
+
+
+    public function checkOldPassword($oldpassword)
+    {
+        $id = $this->session->userdata('userid');
+        $where = array('PASSWORD' => sha1($oldpassword), 'ID' => $id);
+        $this->db->where($where);
+        $result = $this->db->get('tbl_user_detail');
+
+        if ($result->num_rows() == 1) {
+            return true;
+
+        } else {
+            return false;
+        }
+    }
+
+
+    public function updatePassword($data)
+    {
+        $id = $this->session->userdata('userid');
+        $where  = array('ID' => $id);
+        $this->db->where($where);
+        return $this->db->update('tbl_user_detail', $data);
+    }
+
+
+    public function  checkemail($email)
+    {
+        $where = array('EMAIL' => $email);
+        $result = $this->db->get_where('tbl_user_detail', $where);
+
+        if ($result->num_rows() == 1) {
+            return $result->row();
+
+        } else {
+            return false;
+        }
+    }
+
+    public function updateforgotpassword($email, $newpassgen)
+    {
+        $data = array(
+            'PASSWORD' => sha1($newpassgen)
+        );
+
+        $this->db->where('EMAIL', $email);
+        return $this->db->update('tbl_user_detail', $data);
+    }
 
 
 

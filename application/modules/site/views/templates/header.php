@@ -7,7 +7,7 @@
 			<p class="phonenum"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> + 977 9841 234567</p>
 
 			<a href="<?php echo base_url().'logout' ?>" ><p class="phonenum pull-right"><span class="fa fa-sign-out" aria-hidden="true"></span> Logout</p></a>
-			<a href="#"><p class="phonenum pull-right" style="padding-right: 10px"><span class="fa fa-user" aria-hidden="true"></span> <?php echo $this->session->userdata('welcome'); ?></p></a>
+			<a href="<?php echo base_url().'profile' ?>"><p class="phonenum pull-right" style="padding-right: 10px"><span class="fa fa-user" aria-hidden="true"></span> <?php echo $this->session->userdata('welcome'); ?></p></a>
 			
 			
 

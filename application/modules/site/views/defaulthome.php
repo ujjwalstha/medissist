@@ -80,7 +80,7 @@
 					<p>
 						<?php 
 						$attributes = array('id' => 'forgot-password-form', 'method' => 'post', 'name' => 'forgot-password-form');
-						echo form_open('', $attributes) 
+						echo form_open('site/forgotpassword', $attributes) 
 						?>
 
 						<div class="form-group">
@@ -100,17 +100,29 @@
 	</div>
 
 
-
 	<article >
 		<div class="container">
 
 			<div class="col-sm-8">
-				<!-- <div class="col-md-2"></div>
+				<div class="col-md-2"></div>
 
 				<div class="col-md-8" style="margin-top: 45px">
+					<?php if ($this->session->flashdata('forgotpassword_success')): ?>
+						<div class="alert alert-success" style="font-size: 14px; text-align: center;">
+							<i class="fa fa-check-circle"></i>
+							<?php echo $this->session->flashdata('forgotpassword_success') ?>
+						</div>
+					<?php endif; ?>
+
+					<?php if ($this->session->flashdata('forgotpassword_fail')): ?>
+						<div class="alert alert-danger"  style="font-size: 14px; text-align: center;">
+							<i class="fa fa-times-circle"></i>
+							<?php echo $this->session->flashdata('forgotpassword_fail') ?>
+						</div>
+					<?php endif; ?>
 				</div>
 
-				<div class="col-md-2"></div> -->
+				<div class="col-md-2"></div>
 
 				<div class="login-main">
 					<h4><i class="fa fa-dashboard"></i> Online Health Assistive System</h4>
@@ -180,7 +192,7 @@
 
 						<input type="radio" name="gender" id="male" value="male"> <label class="control-label" for="male">Male</label>
 						<input type="radio" name="gender" id="female" value="female"> <label class="control-label" for="female">Female</label>
-						<input type="radio" name="gender" id="others" value="others"> <label class="control-label" for="others">Others</label>
+						<!-- <input type="radio" name="gender" id="others" value="others"> <label class="control-label" for="others">Others</label> -->
 					</div>
 
 					<div class="form-group">
@@ -258,34 +270,34 @@
 
 
 
-	$(document).on("click", "#signupBtn", function(){
+		$(document).on("click", "#signupBtn", function(){
 
-		$("form[name='signup-form']").validate({
+			$("form[name='signup-form']").validate({
 	    // Specify validation rules
-		    rules: {
+	    rules: {
 
-		    	firstname: {
-		    		required: true
-		    	},
-		    	lastname: {
-		    		required: true
-		    	},
-		    	email: {
-		    		required: true,
-		    		email: true
-		    	},
-		    	password: {
-		    		required: true,
-		    		minlength: 6
-		    	},
-		    	gender: {
-		    		required: true,
-		    	},
-		    	termscheck: {
-		    		required: true,
-		    	}
+	    	firstname: {
+	    		required: true
+	    	},
+	    	lastname: {
+	    		required: true
+	    	},
+	    	email: {
+	    		required: true,
+	    		email: true
+	    	},
+	    	password: {
+	    		required: true,
+	    		minlength: 6
+	    	},
+	    	gender: {
+	    		required: true,
+	    	},
+	    	termscheck: {
+	    		required: true,
+	    	}
 
-		    },
+	    },
 		    // Specify validation error messages
 		    messages: {
 
@@ -314,20 +326,20 @@
 
 		});
 
-	});
+		});
 
 
-	$(document).off("click", "#forgotpass-btn").on("click", "#forgotpass-btn", function(){
+		$(document).off("click", "#forgotpass-btn").on("click", "#forgotpass-btn", function(){
 
-		$("form[name='forgot-password-form']").validate({
+			$("form[name='forgot-password-form']").validate({
 	    // Specify validation rules
-		    rules: {
+	    rules: {
 
-		    	email: {
-		    		required: true,
-		    		email: true
-		    	}
-		    },
+	    	email: {
+	    		required: true,
+	    		email: true
+	    	}
+	    },
 		    // Specify validation error messages
 		    messages: {
 
@@ -339,7 +351,7 @@
 
 		});
 
-	});
+		});
 
-});	
+	});	
 </script>

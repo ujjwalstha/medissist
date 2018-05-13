@@ -407,7 +407,8 @@ class Admin_model extends CI_Model {
         $data = array(
             'NAME'      => $fullname,
             'USER_TYPE' => "admin",
-            'MESSAGE'   => $message
+            'MESSAGE'   => $message,
+            'CREATED'   => date('Y-m-d H:i:s')
         );
 
         return $this->db->insert($table, $data);

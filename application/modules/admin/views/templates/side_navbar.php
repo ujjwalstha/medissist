@@ -38,7 +38,7 @@
 				
 				<li class="treeview">
 					<a href="#">
-						<i class="fa fa-user-md text-green"></i> <span>Health Specialist</span>
+						<i class="fa fa-user-md text-green"></i> <span>Manage Health Specialist</span>
 						<span class="pull-right-container">
 							<i class="fa fa-angle-left pull-right"></i>
 						</span>
@@ -51,7 +51,7 @@
 
 				<li><a href="<?php echo base_url().'admin/manageuser' ?>"><i class="fa fa-user text-blue"></i> <span>Manage Users</span></a></li>
 
-				<li><a href="<?php echo base_url().'admin/healthproblems' ?>"><i class="fa fa-heartbeat text-red"></i> <span>Health Problems</span></a></li>
+				<li><a href="<?php echo base_url().'admin/healthproblems' ?>"><i class="fa fa-heartbeat text-red"></i> <span>Manage Health Problems</span></a></li>
 
 				<li><a href="<?php echo base_url().'admin/medicinalproduct' ?>"><i class="fa fa-medkit text-green"></i> <span>Medicinal Products</span></a></li>
 

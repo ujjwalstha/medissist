@@ -98,6 +98,8 @@
 										<th>Last Name</th>
 										<th>Email</th>
 										<th>Gender</th>
+										<th>Blood group</th>
+										<th>Contact No.</th>
 
 										<?php if($this->session->userdata('admintype') == 1): ?>
 											<th>Status</th>  
@@ -122,6 +124,8 @@
 												<td><?php echo $user->LASTNAME; ?></td>
 												<td><?php echo $user->EMAIL; ?></td>
 												<td><?php echo $user->GENDER; ?></td>
+												<td><?php echo $user->BLOOD_GROUP ? $user->BLOOD_GROUP : '-'; ?></td>
+												<td><?php echo $user->CONTACTNO ? $user->CONTACTNO : '-'; ?></td>
 
 												<?php if($this->session->userdata('admintype') == 1): ?>
 												<td>

@@ -260,11 +260,52 @@ class Admin extends MX_Controller {
 					'PAST_AFFILIATION'		=>	$pastaffiliation,
 					'OVERALL_MEMBERSHIP'	=>	$membership,
 					'IMAGE'					=>	$imagename,
+					'CREATED_DATE'			=>  date('Y-m-d H:i:s'),
 				);
 
 				$addspecialist = $this->admin_model->addspecialist($data);
 
 				if ($addspecialist) {
+
+					$to 		= $email;
+					$from 		= 'info.medissist@gmail.com';
+					$subject	= 'Regarding: Registration in Medissist: Online Health Assistive System';
+
+
+					$msg = "Dear ".ucwords($name).",<br><br>
+
+						<b>Welcome to Medissist: Online Health Assistive System!</b><br><br> You have been successfully registered in our system. Please refer to the link below to get access:<br><br> 
+							<b>Link to Medissist system:</b> http://50.63.163.55/~ujjwalsh/medissist/admin/login<br><br>
+
+							Below is your respective credential to log into the system:<br><br>
+
+						<table>
+							<tr>
+								<th>Email</th>
+								<th>:<th>
+								<td>".$to."</td>
+							</tr>
+							<tr>
+								<th>Password</th>
+								<th>:<th>
+								<td>".$password."</td>
+							</tr>
+						</table><br>
+
+						Also, please refer to the link below to get access into instant chat system of <b>Tawk.to Dashboard</b>.<br><br>
+						<b>Link to Tawk.to Dashboard:</b> https://dashboard.tawk.to/login<br><br>
+
+						The login credential for this is also same. Please don't forget to change your password after you log into the both system.<br><br>
+
+						Thank you, <br>
+						Medissist Team.<br><br><br><br>
+
+					   <b><i>This is an auto generated mail, please do not reply to this mail.</i></b>";
+
+
+
+					$sendmail = $this->send($to, $from, $subject, $msg, null);
+
 					$message = 'Specialist added successfully.';
 					$this->session->set_flashdata('addspecialist_success', $message);
 					redirect('admin/managespecialist');
@@ -940,7 +981,7 @@ class Admin extends MX_Controller {
 				USER_TYPE VARCHAR(30) NOT NULL,
 				MESSAGE TEXT NOT NULL,
 				SEEN_STATUS INT(2) DEFAULT 0, 
-				CREATED TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+				CREATED DATETIME NOT NULL
 			)";
 
 			$this->db->query($createtable);
@@ -1018,7 +1059,8 @@ class Admin extends MX_Controller {
 			$data = array(
 				'NAME'			=> $name,
 				'SLUG'		  	=> $slug,
-				'DESCRIPTION'	=> $description
+				'DESCRIPTION'	=> $description,
+				'CREATED_ON'	=> date('Y-m-d H:i:s')
 			);
 
 			$insertHealthProblems = $this->admin_model->insertHealthProblems($data);
@@ -1175,7 +1217,8 @@ class Admin extends MX_Controller {
 			$data = array(
 				'NAME'			=> $name,
 				'SLUG'		  	=> $slug,
-				'DESCRIPTION'	=> $description
+				'DESCRIPTION'	=> $description,
+				'CREATED_ON'	=> date('Y-m-d H:i:s')
 			);
 
 			$insertMedicinalProduct = $this->admin_model->insertMedicinalProduct($data);
@@ -1301,6 +1344,121 @@ class Admin extends MX_Controller {
 		endif;
 	}
 
+
+
+	public function send($to, $from, $subject, $message, $attachment=null)
+	{
+		if($this->session->userdata('adminid') != ''):
+
+			$config = Array(
+				        'protocol' 	=> 'smtp',
+				        'smtp_host' => 'ssl://smtp.gmail.com',
+				        'smtp_port' =>	465,
+				        'smtp_user' => 'info.medissist@gmail.com',
+				        'smtp_pass' => 'Jordan@23',
+				        'mailtype'  => 'html', 
+				        'charset'   => 'iso-8859-1'
+				    );
+		   
+		    $this->email->initialize($config);
+		    $this->email->set_newline("\r\n");
+
+			// $msg = $message."<br><br><br>
+
+			//     Name: ".$name."<br>"."Id: ".$from;
+			
+			
+
+			$this->email->from($from);
+			$this->email->to($to);
+			$this->email->subject($subject);
+			$this->email->message($message);
+			if ($attachment) {
+				$this->email->attach($attachment);
+			}
+		 	$this->email->send();
+
+	 	else:   
+			redirect('admin/login');    
+		endif;
+	}
+
+
+
+	public function sendtest()
+	{
+		if($this->session->userdata('adminid') != ''):
+
+			$config = Array(
+				        'protocol' 	=> 'smtp',
+				        'smtp_host' => 'ssl://smtp.gmail.com',
+				        'smtp_port' =>	465,
+				        'smtp_user' => 'info.medissist@gmail.com',
+				        'smtp_pass' => 'Jordan@23',
+				        'mailtype'  => 'html', 
+				        'charset'   => 'iso-8859-1'
+				    );
+		   
+		    $this->email->initialize($config);
+		    $this->email->set_newline("\r\n");
+
+			// $msg = $message."<br><br><br>
+
+			//     Name: ".$name."<br>"."Id: ".$from;
+
+		    $from = 'info.medissist@gmail.com';
+		    $to = 'ujjwalshresth.tbc@gmail.com';
+		    $subject = 'Test mail';
+		    $attachment = null;
+		    $name = 'Ujjwal';
+		    $password = '123456';
+
+		    $message = "Dear ".ucwords($name).",<br><br>
+
+						<b>Welcome to Medissist: Online Health Assistive System!</b><br><br> You have been successfully registered in our system. Please refer to the link below to get access:<br><br> 
+							<b>Link to Medissist system:</b> http://50.63.163.55/~ujjwalsh/medissist/admin/login<br><br>
+
+							Below is your respective credential to log into the system:<br><br>
+
+						<table>
+							<tr>
+								<th>Email</th>
+								<th>:<th>
+								<td>".$to."</td>
+							</tr>
+							<tr>
+								<th>Password</th>
+								<th>:<th>
+								<td>".$password."</td>
+							</tr>
+						</table><br>
+
+						Also, please refer to the link below to get access into instant chat system of <b>Tawk.to Dashboard</b>.<br><br>
+						<b>Link to Tawk.to Dashboard:</b> https://dashboard.tawk.to/login<br><br>
+
+						The login credential for this is also same. Please don't forget to change your password after you log into the both system.<br><br>
+
+						Thank you, <br>
+						Medissist Team.<br><br><br><br>
+
+					   <b><i>This is an auto generated mail, please do not reply to this mail.</i></b>";
+
+			
+			
+
+			$this->email->from($from);
+			$this->email->to($to);
+			$this->email->subject($subject);
+			$this->email->message($message);
+			if ($attachment) {
+				$this->email->attach($attachment);
+			}
+		 	$this->email->send();
+
+	 	else:   
+			redirect('admin/login');    
+		endif;
+	}
 
 
 

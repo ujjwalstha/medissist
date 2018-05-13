@@ -16,7 +16,7 @@
 <body class="hold-transition login-page">
 
 <div class="container-fluid">
-	<h4>Welcome To Online Health System 1.0</h4>
+	<h4>Welcome To Medissist 1.0</h4>
 </div>
 
 

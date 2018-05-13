@@ -293,7 +293,7 @@
 							</script>
 							<!--//required-js-files-->
 							<div id="owl-demo" class="owl-carousel">
-								<?php foreach($getspecialist as $specialist): ?>
+								<?php foreach($getspecialistsaying as $specialist): ?>
 								<div class="item-owl">
 
 									<p class="speech"><?php echo $specialist->PATIENT_MSG; ?></p>

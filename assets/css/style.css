@@ -1706,7 +1706,7 @@ h3.tittle.three {
 	}
 .contact-form{
 	position:relative;
-    margin-top: 3em;
+    /*margin-top: 3em;*/
 }
 .left_form{
 	float:left;
@@ -1726,9 +1726,9 @@ h3.tittle.three {
     color: #777;
     padding-bottom: 5px;
     font-weight: 400;
-    margin: 0.5em 0;
+    /*margin: 0.5em 0;*/
 }
-.contact-form input[type="text"],.contact-form textarea{
+.contact-form input[type="text"],.contact-form textarea, .contact-form input[type="password"], .contact-form select{
 		       padding:16px 15px;
 			display:block;
 			width:100%;
@@ -1743,6 +1743,8 @@ h3.tittle.three {
 			-o-box-shadow: inset 0px 0px 3px #999;
 			-webkit-appearance:none;
 }
+
+
 .contact-form textarea{
 		resize:none;
 	    height: 197px;
@@ -2841,7 +2843,7 @@ float:left;
 	}
 	.contact-form {
 		position: relative;
-		margin-top: 1em;
+		/*margin-top: 1em;*/
 	}
 	.flickr-grid {
 		float: left;
@@ -3770,6 +3772,14 @@ input#gsc-i-id1.gsc-input{
 
 
 /*Google custom search bar ends here*/
+
+#map {
+    height: 385px;
+    width: 100%;
+}
+
+
+
 
 
 

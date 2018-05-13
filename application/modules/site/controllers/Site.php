@@ -70,6 +70,7 @@ class Site extends MX_Controller {
 					"EMAIL"			=> $email,
 					"PASSWORD"		=> sha1($this->input->post('password')),
 					"GENDER"		=> $this->input->post('gender'),
+					"CREATED_ON"	=> date('Y-m-d H:i:s'),
 				);
 
 				$userRegister = $this->site_model->userRegister($data);
@@ -137,6 +138,7 @@ class Site extends MX_Controller {
 		if($this->session->userdata('userid') != ''):
 
 			// echo $this->session->userdata('userid'); exit;
+			self::$viewData['getspecialistsaying'] = $this->site_model->getspecialistsaying();
 			self::$viewData['title'] = 'Medissist | Home';
 			self::$viewData['page'] = 'site/home';
 			$this->load->view(TEMPPATH, self::$viewData);
@@ -217,6 +219,7 @@ class Site extends MX_Controller {
 			$data = array(
 				"USER_ID" 	=> $userid,
 				"QUESTION"	=> $this->input->post('question'),
+				"CREATED"	=> date('Y-m-d H:i:s'),
 			);
 
 			$userRegister = $this->site_model->addForumQuestion($data);
@@ -250,7 +253,8 @@ class Site extends MX_Controller {
 			$data = array(
 				"QUESTION_ID"	=> $quesid,
 				"USER_ID" 		=> $userid,
-				"ANSWER"		=> $answer
+				"ANSWER"		=> $answer,
+				"CREATED"		=> date('Y-m-d H:i:s'),
 			);
 
 			$userRegister = $this->site_model->addForumAnswer($data);
@@ -366,7 +370,7 @@ class Site extends MX_Controller {
 	                            USER_TYPE VARCHAR(30) NOT NULL,
 	                            MESSAGE TEXT NOT NULL,
 	                            SEEN_STATUS INT(2) DEFAULT 0, 
-	                            CREATED TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+	                            CREATED DATETIME NOT NULL
 	                            )";
 
 	            $this->db->query($createtable);
@@ -594,4 +598,230 @@ class Site extends MX_Controller {
             redirect(base_url());    
         endif;
     }
+
+
+ 
+
+
+    public function profile()
+	{
+		// echo "here";exit;
+		if($this->session->userdata('userid') != ''):
+
+			if (isset($_POST['editprofile-btn'])) {
+
+				$id = $this->session->userdata('userid');
+
+				$firstname 	= $this->input->post('firstname');
+				$lastname 	= $this->input->post('lastname');
+				$email 		= $this->input->post('email');
+				$gender 	= $this->input->post('gender');
+				$bloodgroup = $this->input->post('bloodgroup');
+				$contact 	= $this->input->post('contact');
+				
+				// echo $specialisttype;exit;
+
+				$data = array(
+					'FIRSTNAME'		=>	$firstname,
+					'LASTNAME'		=>	$lastname,
+					"SLUG"			=>  strtolower($firstname).'-'.strtolower($lastname),
+					'EMAIL'			=>	$email,
+					'GENDER'		=>	$gender,
+					'BLOOD_GROUP'	=>	$bloodgroup,
+					'CONTACTNO'		=>	$contact,
+					'UPDATED_ON'	=>  date('Y-m-d H:i:s'),
+				);
+
+				$updateprofile = $this->site_model->updateprofile($data, $id);
+
+				if ($updateprofile) {
+					$message = 'Profile has been updated.';
+					$this->session->set_flashdata('editprofile_success', $message);
+					redirect('site/profile');
+
+				} else {
+					$message = 'Failed to update Profile.';
+					$this->session->set_flashdata('editprofile_fail', $message);
+					redirect('site/profile');    		
+				}
+
+			} else {
+
+				self::$viewData['title'] = 'Medissist | Profile';
+				self::$viewData['userdetail'] = $this->site_model->getUserDetail();
+			
+				self::$viewData['page'] = 'site/profile';
+				$this->load->view(TEMPPATH, self::$viewData);
+
+			}
+
+		else:   
+            redirect(base_url());    
+        endif;
+	}
+
+
+	public function changepassword()
+	{
+		if($this->session->userdata('userid') != ''):
+
+			$oldpassword = $this->input->post('oldpassword');
+			$checkOldPassword = $this->site_model->checkOldPassword($oldpassword);
+
+			if ($checkOldPassword == true ) {
+
+				$newpassword = $this->input->post('newpassword');
+				$data = array(
+					'PASSWORD' 		=> sha1($newpassword),
+					'UPDATED_ON'	=> date('Y-m-d H:i:s'),
+				);
+
+				$updatePassword = $this->site_model->updatePassword($data);
+
+				if ($updatePassword) {
+					$message = 'Password updated successfully.';
+					$this->session->set_flashdata('passUpdate_success', $message);
+					redirect('site/profile');  
+
+				} else {
+					$message = 'Password update failed.';
+					$this->session->set_flashdata('passUpdate_fail', $message);
+					redirect('site/profile');  
+				}
+
+			} else {
+				$message = 'Old password did not match.';
+				$this->session->set_flashdata('passUpdate_fail', $message);
+				redirect('site/profile');  
+			} 
+
+		else:   
+            redirect(base_url());    
+        endif;
+	}
+
+
+	public function send($to, $from, $subject, $message, $attachment=null)
+	{
+			$config = Array(
+				        'protocol' 	=> 'smtp',
+				        'smtp_host' => 'ssl://smtp.gmail.com',
+				        'smtp_port' =>	465,
+				        'smtp_user' => 'info.medissist@gmail.com',
+				        'smtp_pass' => 'Jordan@23',
+				        'mailtype'  => 'html', 
+				        'charset'   => 'iso-8859-1'
+				    );
+		   
+		    $this->email->initialize($config);
+		    $this->email->set_newline("\r\n");
+
+			// $msg = $message."<br><br><br>
+
+			//     Name: ".$name."<br>"."Id: ".$from;
+			
+			
+
+			$this->email->from($from);
+			$this->email->to($to);
+			$this->email->subject($subject);
+			$this->email->message($message);
+			if ($attachment) {
+				$this->email->attach($attachment);
+			}
+		 	$this->email->send();
+	}
+
+
+	public function sendfeedback()
+	{
+		if($this->session->userdata('userid') != ''):
+
+			$getUserDetail = $this->site_model->getUserDetail();
+
+			$sub 		= $this->input->post('subject');
+			$subject 	= 'User Feedback: '.ucfirst($sub);
+			$message 	= $this->input->post('message');
+			$to 		= 'info.medissist@gmail.com';
+			$from 		= $getUserDetail->EMAIL;
+			$name       = $getUserDetail->FIRSTNAME.' '.$getUserDetail->LASTNAME;
+	
+			$msg = $message."<br><br><br>
+
+		    Name: ".$name."<br>"."Email: ".$from;
+
+		    $sendmail = $this->send($to, $from, $subject, $msg, null);
+
+			$message = 'Thank you for your feedback!';
+	        $this->session->set_flashdata('feedback_success', $message);
+	        redirect('site/contact');
+
+		else:   
+            redirect(base_url());    
+        endif;
+	}
+
+
+	public function forgotpassword()
+	{
+		if($this->session->userdata('userid') == ''):
+
+			$email = $this->input->post('email');
+			$checkemail = $this->site_model->checkemail($email);
+
+			if ($checkemail) {
+				
+				#for generating random string of 10 characters
+    	 		$init = 0; #to define position from $string
+    	 		$length = 6; #to define the length of string to be generated
+    	 		$timestamp = strtotime('Y-m-d H:i:s');
+    	 		$string = "abcdefghijklmnopqrstuvwxyz0123456789".md5($timestamp);  
+				$randomletter = substr(str_shuffle(md5($string)), $init, $length);
+	    	 	$newpassgen = strtoupper($randomletter); #all alphabets are generated in upper case 
+
+	    	 	$updateforgotpassword = $this->site_model->updateforgotpassword($email, $newpassgen);
+
+	    	 	if ($updateforgotpassword) {
+	    	 		
+	    	 		$name 		= $checkemail->FIRSTNAME;
+	    	 		$subject 	= "Medissist: Account Password Recovery"; 
+	    	 		$to 		= $checkemail->EMAIL;
+	    	 		$from 		= 'info.medissist@gmail.com';
+
+	    	 		$msg = "Dear ".ucwords($name).",<br><br>
+
+						Your password has been successfully reset. Your new password is <b>".$newpassgen."</b>. Please reset your password after you log in.<br><br>
+
+						Thank you, <br>
+						Medissist Team.<br><br><br><br>
+
+					   <b><i>This is an auto generated mail, please do not reply to this mail.</i></b>";
+
+
+	    	 		$sendmail = $this->send($to, $from, $subject, $msg, null);
+
+					$message = 'A password recovery mail has been sent to you. Please check your mail.';
+			        $this->session->set_flashdata('forgotpassword_success', $message);
+			        redirect('site/index');
+
+
+	    	 	} else {
+	    	 		$message = 'Sorry! Something went wrong. Please try again.';
+			        $this->session->set_flashdata('forgotpassword_fail', $message);
+			        redirect('site/index');
+	    	 	}
+
+			} else {
+				$message = 'Sorry! Email does not exist.';
+		        $this->session->set_flashdata('forgotpassword_fail', $message);
+		        redirect('site/index');
+			}
+
+		else:   
+            redirect('home');     
+        endif;
+	}
+
+
+
 }
