@@ -10,13 +10,14 @@
  <div class="contact-top">
  	<div class="container">
 
-		<div class="col-md-2"></div>
+		<div class="col-md-1"></div>
 
  		<div class="col-md-4">
  			<img class="image  thumbnail" src="<?php echo base_url().'uploads/images/specialists/'.$specialist->IMAGE ?>" alt=" " style="height: 330px; width: 330px">
+ 			<a href="<?php echo base_url().'privatemessage/'.$specialist->ID ?>" class="btn btn-danger btn-md" style="width: 330px"><i class="fa fa-envelope"></i> SEND PRIVATE MESSAGE</a>
  		</div>
 
- 		<div class="col-md-4">
+ 		<div class="col-md-5">
  			<table class="table table-responsive">
  				<tr>
  					<th class="strong-th">Name</th>

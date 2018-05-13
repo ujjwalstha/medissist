@@ -12,7 +12,7 @@
  		<div class="contact-text">
  			<div class="con-text">
  				<p><a href="mailto:info.medissist@gmail.com"> info.medissist@gmail.com</a></p>
- 				<p> +977 9841 ******</p>
+ 				<p> +977 9841 234567</p>
  				<h6> Thapathali, Kathmandu Nepal</h6>
  			</div>
  		</div>

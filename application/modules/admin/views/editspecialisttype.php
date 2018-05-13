@@ -7,7 +7,7 @@
 			<small><?php echo $breadcrumb; ?></small>
 		</h1>
 		<ol class="breadcrumb">
-			<li><a href="<?php echo base_url().'admin/dashboard'; ?>"><i class="fa fa-dashboard"></i> Home</a></li>
+			<li><a href="<?php echo base_url().'admin/adminpanel'; ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
 			<li class="active"><?php echo $breadcrumb; ?></li>
 		</ol>
 	</section>
@@ -27,6 +27,26 @@
 
 					<!-- /.box-header -->
 					<div class="box-body">
+
+						<div class="col-md-4"></div>
+
+						<div class="col-md-4">
+							<?php if ($this->session->flashdata('typeupdate_success')): ?>
+								<div class="alert alert-success" style="font-size: 14px; text-align: center;">
+									<i class="fa fa-check-circle"></i>
+									<?php echo $this->session->flashdata('typeupdate_success') ?>
+								</div>
+							<?php endif; ?>
+
+							<?php if ($this->session->flashdata('typeupdate_fail')): ?>
+								<div class="alert alert-danger"  style="font-size: 14px; text-align: center;">
+									<i class="fa fa-times-circle"></i>
+									<?php echo $this->session->flashdata('typeupdate_fail') ?>
+								</div>
+							<?php endif; ?>
+						</div>
+
+						<div class="col-md-4"></div>
 
 						<div class="col-md-12" style="margin-top: 20px">
 							<div class="col-md-4">

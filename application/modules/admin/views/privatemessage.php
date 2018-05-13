@@ -34,7 +34,7 @@ function time_since($since) {
 			<small><?php echo $breadcrumb; ?></small>
 		</h1>
 		<ol class="breadcrumb">
-			<li><a href="<?php echo base_url().'admin/dashboard'; ?>"><i class="fa fa-dashboard"></i> Home</a></li>
+			<li><a href="<?php echo base_url().'admin/adminpanel'; ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
 			<li class="active"><?php echo $breadcrumb; ?></li>
 		</ol>
 	</section>

@@ -7,7 +7,7 @@
 			<small><?php echo $breadcrumb; ?></small>
 		</h1>
 		<ol class="breadcrumb">
-			<li><a href="<?php echo base_url().'admin/dashboard'; ?>"><i class="fa fa-dashboard"></i> Home</a></li>
+			<li><a href="<?php echo base_url().'admin/adminpanel'; ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
 			<li class="active"><?php echo $breadcrumb; ?></li>
 		</ol>
 	</section>
@@ -135,19 +135,7 @@
 									</div>
 								<?php endif; ?>
 
-								<?php if ($this->session->flashdata('healthproblem_update_success')): ?>
-									<div class="alert alert-success" style="font-size: 14px; text-align: center;">
-										<i class="fa fa-check-circle"></i>
-										<?php echo $this->session->flashdata('healthproblem_update_success') ?>
-									</div>
-								<?php endif; ?>
-
-								<?php if ($this->session->flashdata('healthproblem_update_fail')): ?>
-									<div class="alert alert-danger"  style="font-size: 14px; text-align: center;">
-										<i class="fa fa-times-circle"></i>
-										<?php echo $this->session->flashdata('healthproblem_update_fail') ?>
-									</div>
-								<?php endif; ?>
+								
 
 							
 							</div>

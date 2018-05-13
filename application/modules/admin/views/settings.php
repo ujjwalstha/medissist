@@ -7,7 +7,7 @@
       <small><?php echo $breadcrumb; ?></small>
     </h1>
     <ol class="breadcrumb">
-      <li><a href="<?php echo base_url().'admin/dashboard'; ?>"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="<?php echo base_url().'admin/adminpanel'; ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
       <li class="active"><?php echo $breadcrumb; ?></li>
     </ol>
   </section>
@@ -77,7 +77,43 @@
                   <div class="control-group">
                     <div class="form-group  ">
                       <label>Specialist Type</label>
-                      <input type="text" class="form-control" name="specialisttype" id="specialisttype" value="<?php echo $admin_details->SPECIALIST_TYPE ?>">
+                      <select class="form-control" name="specialisttype" id="specialisttype" style="width: 100%;">
+
+                        <?php
+                        foreach ($getspecialisttype as $type):
+                          ?>
+                          <option class="specialisttype-option" value="<?php echo $type->SPECIALIST_TYPE ?>" <?php if($type->SPECIALIST_TYPE == $admin_details->SPECIALIST_TYPE) echo "selected='selected'"?> ><?php echo ucwords($type->SPECIALIST_TYPE); ?></option>
+                        <?php endforeach; ?>  
+
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="control-group">
+                    <div class="form-group  ">
+                      <label>Qualification</label>
+                      <textarea name="qualification"  id="qualification" class="form-control"><?php echo $admin_details->QUALIFICATION ?></textarea>
+                    </div>
+                  </div>
+
+                  <div class="control-group">
+                    <div class="form-group  ">
+                      <label>Past Affilication</label>
+                      <textarea name="pastaffiliation"  id="pastaffiliation" class="form-control"><?php echo $admin_details->PAST_AFFILIATION ?></textarea>
+                    </div>
+                  </div>
+
+                  <div class="control-group">
+                    <div class="form-group  ">
+                      <label>Overall Membership</label>
+                      <textarea name="membership"  id="membership" class="form-control"><?php echo $admin_details->OVERALL_MEMBERSHIP ?></textarea>
+                    </div>
+                  </div>
+
+                  <div class="control-group">
+                    <div class="form-group  ">
+                      <label>A message for patient</label>
+                      <textarea name="patientmsg"  id="patientmsg" class="form-control" style="height: 90px"><?php echo $admin_details->PATIENT_MSG ?></textarea>
                     </div>
                   </div>
                 <?php endif; ?>
@@ -124,6 +160,10 @@
               <?php echo form_close(); ?>
 
               <br> 
+
+
+
+
             </div>
 
 
@@ -193,6 +233,9 @@
           </div>
 
 
+          
+
+
 
         </div>
 
@@ -208,6 +251,19 @@
 
 <!-- jQuery 3 -->
 <script src="<?php echo base_url().'assets/admin_assets/bower_components/jquery/dist/jquery.min.js' ?>"></script>
+<script type="text/javascript" src="<?php echo base_url().'assets/ckeditor/ckeditor.js' ?>"> </script>
+
+<script>
+  
+ CKEDITOR.replace( 'qualification' );
+ 
+
+ CKEDITOR.replace( 'pastaffiliation' );
+ CKEDITOR.add
+
+ CKEDITOR.replace( 'membership' );
+ CKEDITOR.add     
+</script>
 
 
 

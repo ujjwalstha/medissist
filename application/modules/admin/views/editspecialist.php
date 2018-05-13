@@ -7,7 +7,7 @@
 			<small><?php echo $breadcrumb; ?></small>
 		</h1>
 		<ol class="breadcrumb">
-			<li><a href="<?php echo base_url().'admin/dashboard'; ?>"><i class="fa fa-dashboard"></i> Home</a></li>
+			<li><a href="<?php echo base_url().'admin/adminpanel'; ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
 			<li class="active"><?php echo $breadcrumb; ?></li>
 		</ol>
 	</section>
@@ -239,3 +239,16 @@
 <script src="<?php echo base_url().'assets/admin_assets/bower_components/jquery/dist/jquery.min.js' ?>"></script>
 
 
+<script type="text/javascript" src="<?php echo base_url().'assets/ckeditor/ckeditor.js' ?>"> </script>
+
+<script>
+  
+   CKEDITOR.replace( 'qualification' );
+  
+
+    CKEDITOR.replace( 'pastaffiliation' );
+    CKEDITOR.add
+
+    CKEDITOR.replace( 'membership' );
+    CKEDITOR.add     
+</script>

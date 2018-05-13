@@ -53,3 +53,14 @@
 <body class="hold-transition skin-blue sidebar-mini">
 
   <div class="wrapper">
+
+
+    <?php  
+
+      function get_words($sentence, $count) {
+    preg_match("/(?:\w+(?:\W+|$)){0,$count}/", $sentence, $matches);
+    return $matches[0];
+  }
+
+
+    ?>

@@ -113,17 +113,20 @@
 				<div class="col-md-2"></div> -->
 
 				<div class="login-main">
-					<h4><i class="fa fa-dashboard"></i> Gorgeous color and design</h4>
-					<span>Some sample description text about the template goes here</span>
+					<h4><i class="fa fa-dashboard"></i> Online Health Assistive System</h4>
+					<span>Welcome to Medissist, place where you can get free medical advise from professional health specialist.</span>
 
-					<h4> <i class="fa fa-money"></i> 100%  fully responsive </h4>
-					<span>Another description text about the template goes here</span>
+					<h4> <i class="fa fa-money"></i> No card payment or card details required </h4>
+					<span>Don't worry, we wont ask for anything which will stop you from making full use of our services.</span>
 
-					<h4><i class="fa fa-mobile-phone"></i> Competible with all browers and mobile devices</h4>
-					<span>Yet another sample description text can be placed in one line</span>
+					<h4><i class="fa fa-user-md"></i> Communicate and interact with the doctors through chat</h4>
+					<span>Need some health advise? Our health specialist are here to help you.</span>
 
-					<h4> <i class="fa fa-trophy"></i> Easy to use and custmize with mobile friendly and responsive</h4>
-					<span>Your last description text about your startup or business</span>
+					<h4> <i class="fa fa-users"></i> Communicate with other people through forum</h4>
+					<span>Share your heart out regarding your health problem or knowledge with other people.</span>
+
+					<h4> <i class="fa fa-heartbeat"></i> Live a happy and healthy life</h4>
+					<span>We wish you a very happy and healthy life and hope sickness won't be the only reason for you to visit us.</span>
 				</div>
 			</div>
 

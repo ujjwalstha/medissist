@@ -10,7 +10,7 @@
 
 <!--//team-->
 <div class="team_agile">
-	<div class="container" style="margin-top: -55px">
+	<div class="container" style="margin-top: -40px">
 
 		<!-- <div class="sub-hd two">
 			<h3 class="tittle two">MEET THE <span class="two">SPECIALISTS</span></h3>
@@ -63,7 +63,7 @@
 <!--//team-->
 
 <div class="container alert-message text-muted">
-	<span style="font-weight: bold; color: #e45753;">ATTENTION:</span>  Send private message to the specialist if they are unavailable. Orelse you can instantly chat with them through chat media located at the bottom. Thank you.
+	<span style="font-weight: bold; color: #e45753;">ATTENTION:</span>  Send private message to the specialist if they are unavailable. Or you can instantly chat with them through chat media located at the bottom. Thank you.
 </div>
 
 

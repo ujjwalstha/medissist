@@ -133,6 +133,37 @@ class Admin_model extends CI_Model {
         }
     }
 
+    public function getrecentspecialist()
+    {
+        $where = array('ADMIN_TYPE' => 2);
+        $this->db->order_by('CREATED_DATE', 'DESC');
+        $this->db->limit(4);
+        $result = $this->db->get_where('tbl_admin_detail', $where);
+
+        if ($result->num_rows() > 0) {
+            return $result->result();
+
+        } else {
+            return false;
+        }
+    }
+
+
+    public function getRecentHealthProblems()
+    {
+        $this->db->order_by('CREATED_ON', 'DESC');
+        $this->db->limit(5);
+        return $this->db->get('tbl_health_problems')->result();
+    }
+
+
+    public function getRecentMedicinalProduct()
+    {
+        $this->db->order_by('CREATED_ON', 'DESC');
+        $this->db->limit(5);
+        return $this->db->get('tbl_medicinal_product')->result();
+    }
+
 
     public function specialistActivate($id)
     {

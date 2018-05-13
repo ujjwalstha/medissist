@@ -51,7 +51,7 @@ class Admin extends MX_Controller {
 
 		        // echo $admintype;exit;
 				if ($admintype == 0) {
-					$message = 'Please select the type you want to login as.';
+					$message = 'Please select the admin type.';
 					$this->session->set_flashdata('login_fail', $message);
 					redirect('admin/login');
 
@@ -116,6 +116,9 @@ class Admin extends MX_Controller {
 			self::$viewData['specialistTypeCount'] = $this->admin_model->specialistTypeCount();
 			self::$viewData['healthProblemCount'] = $this->admin_model->healthProblemCount(); 
 			self::$viewData['medicinalProductCount'] = $this->admin_model->medicinalProductCount();  
+			self::$viewData['getrecentspecialist'] = $this->admin_model->getrecentspecialist();
+			self::$viewData['getRecentHealthProblems'] = $this->admin_model->getRecentHealthProblems();
+			self::$viewData['getRecentMedicinalProduct'] = $this->admin_model->getRecentMedicinalProduct();
 
 			self::$viewData['page'] = "admin/adminpanel";
 			$this->load->view(TEMPADMIN, self::$viewData);
@@ -575,12 +578,12 @@ class Admin extends MX_Controller {
 				if ($updateSpecialistType) {
 					$message = 'A specialist type has been updated.';
 					$this->session->set_flashdata('typeupdate_success', $message);
-					redirect('admin/managespecialisttype');
+					redirect('admin/editspecialisttype/'.$typeid);
 
 				} else {
 					$message = 'Failed to update specialist type.';
 					$this->session->set_flashdata('typeupdate_fail', $message);
-					redirect('admin/managespecialisttype');    		
+					redirect('admin/editspecialisttype/'.$typeid);    		
 				}
 
 			} else {
@@ -778,10 +781,16 @@ class Admin extends MX_Controller {
 			$id = $this->input->post('id');
 
 			$data = array(
-				'NAME' 				=>	$this->input->post('name'),
-				'SLUG' 				=>	$this->input->post('slug'),
-				'USERNAME' 			=>	$this->input->post('username'),
-				'SPECIALIST_TYPE'	=>	$this->input->post('specialisttype')
+				'NAME' 					=>	$this->input->post('name'),
+				'SLUG' 					=>	$this->input->post('slug'),
+				'USERNAME' 				=>	$this->input->post('username'),
+				'SPECIALIST_TYPE'		=>	$this->input->post('specialisttype'),
+				'QUALIFICATION'			=>	$this->input->post('qualification'),
+				'PAST_AFFILIATION'		=>	$this->input->post('pastaffiliation'),
+				'OVERALL_MEMBERSHIP'	=>	$this->input->post('membership'),
+				'PATIENT_MSG'			=>  $this->input->post('patientmsg'),
+				'UPDATED_DATE'			=>  date('Y-m-d H:i:s'),
+
 			);
 
 			$updateProfile = $this->admin_model->updateProfile($id, $data);
@@ -1110,12 +1119,12 @@ class Admin extends MX_Controller {
 				if ($updateHealthProblem) {
 					$message = 'A health problem has been updated.';
 					$this->session->set_flashdata('healthproblem_update_success', $message);
-					redirect('admin/healthproblems');
+					redirect('admin/edithealthproblem/'.$id);
 
 				} else {
 					$message = 'Failed to update health problem.';
 					$this->session->set_flashdata('healthproblem_update_fail', $message);
-					redirect('admin/healthproblems');    		
+					redirect('admin/edithealthproblem/'.$id);    		
 				}
 
 			} else {
@@ -1266,12 +1275,12 @@ class Admin extends MX_Controller {
 				if ($updateMedicinalProduct) {
 					$message = 'A medicinal product has been updated.';
 					$this->session->set_flashdata('medicinalproduct_success', $message);
-					redirect('admin/medicinalproduct');
+					redirect('admin/editmedicinalproduct/'.$id);
 
 				} else {
 					$message = 'Failed to update medicinal product.';
 					$this->session->set_flashdata('medicinalproduct_fail', $message);
-					redirect('admin/medicinalproduct');    		
+					redirect('admin/editmedicinalproduct/'.$id);    		
 				}
 
 			} else {

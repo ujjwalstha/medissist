@@ -77,9 +77,9 @@
 
 		
 
-			<div class="panel-group" style=" margin-bottom: 50px;" >
-				<div class="panel panel-info" id="forum-top">
-					<?php foreach($forumques as $question): ?>	
+		<div class="panel-group" style=" margin-bottom: 50px;" >
+			<div class="panel panel-info" id="forum-top">
+				<?php foreach($forumques as $question): ?>	
 					<div class="panel-body" style="line-height: 25px;">
 						<div class="col-md-12">
 
@@ -102,7 +102,16 @@
 							</div>
 
 							<div class="col-md-11">
-								<text class="text-muted" style="font-weight: bold"><?php echo $question->FIRSTNAME.' '.$question->LASTNAME; ?></text><br>
+								<text class="text-muted" style="font-weight: bold"><?php echo $question->FIRSTNAME.' '.$question->LASTNAME; ?></text>&emsp; 
+								<text class=" text-muted sent-time" style="font-size: 10px"><span class="glyphicon glyphicon-time "></span>
+									<?php 
+									$created = $question->CREATED;
+									$timestamp = strtotime($created);
+										// $sec = date('s', $timestamp); 
+									echo time_since(time() - $timestamp).' ago' ; 
+									?> 
+								</text>
+								<br>
 								<label style="font-size: 14px; font-style: italic; font-weight: normal;"><?php echo $question->QUESTION; ?></label>
 							</div>
 
@@ -165,7 +174,16 @@
 
 											<div class="col-md-11">
 
-												<text class="text-muted" style="font-weight: bold"><?php echo $res->FIRSTNAME.' '.$res->LASTNAME; ?></text> <br>
+												<text class="text-muted" style="font-weight: bold"><?php echo $res->FIRSTNAME.' '.$res->LASTNAME; ?></text>&emsp;
+												<text class=" text-muted sent-time" style="font-size: 10px"><span class="glyphicon glyphicon-time "></span>
+													<?php 
+													$created = $res->CREATED;
+													$timestamp = strtotime($created);
+										// $sec = date('s', $timestamp); 
+													echo time_since(time() - $timestamp).' ago' ; 
+													?> 
+												</text>
+												<br>
 												<label style="font-size: 14px; font-style: italic; font-weight: normal;"><?php echo $res->ANSWER; ?></label>
 											</div>
 
@@ -209,9 +227,9 @@
 
 						<hr class="hr-line-forum" style="height: 5px; background-color: #bce8f1">
 
-						<?php endforeach; ?>
-					</div>
+					<?php endforeach; ?>
 				</div>
+			</div>
 
 			
 

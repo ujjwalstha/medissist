@@ -4,10 +4,10 @@
 	<div class="header-strip">
 		<div class="container">
 			<p class="location"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <a href="mailto:info@example.com">info.medissist@gmail.com</a></p>
-			<p class="phonenum"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> + 977 9841 ******</p>
+			<p class="phonenum"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> + 977 9841 234567</p>
 
-			<a href="<?php echo base_url().'logout' ?>"><p class="phonenum pull-right"><span class="fa fa-sign-out" aria-hidden="true"></span> Logout</p></a>
-			<a href="#"><p class="phonenum pull-right"><span class="fa fa-user" aria-hidden="true"></span> <?php echo $this->session->userdata('welcome'); ?></p></a>
+			<a href="<?php echo base_url().'logout' ?>" ><p class="phonenum pull-right"><span class="fa fa-sign-out" aria-hidden="true"></span> Logout</p></a>
+			<a href="#"><p class="phonenum pull-right" style="padding-right: 10px"><span class="fa fa-user" aria-hidden="true"></span> <?php echo $this->session->userdata('welcome'); ?></p></a>
 			
 			
 

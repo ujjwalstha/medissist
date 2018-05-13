@@ -7,7 +7,7 @@
 			<small><?php echo $breadcrumb; ?></small>
 		</h1>
 		<ol class="breadcrumb">
-			<li><a href="<?php echo base_url().'admin/dashboard'; ?>"><i class="fa fa-dashboard"></i> Home</a></li>
+			<li><a href="<?php echo base_url().'admin/adminpanel'; ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
 			<li class="active"><?php echo $breadcrumb; ?></li>
 		</ol>
 	</section>
@@ -28,45 +28,65 @@
 					<!-- /.box-header -->
 					<div class="box-body">
 
+						<div class="col-md-4"></div>
+
+						<div class="col-md-4">
+							<?php if ($this->session->flashdata('healthproblem_update_success')): ?>
+								<div class="alert alert-success" style="font-size: 14px; text-align: center;">
+									<i class="fa fa-check-circle"></i>
+									<?php echo $this->session->flashdata('healthproblem_update_success') ?>
+								</div>
+							<?php endif; ?>
+
+							<?php if ($this->session->flashdata('healthproblem_update_fail')): ?>
+								<div class="alert alert-danger"  style="font-size: 14px; text-align: center;">
+									<i class="fa fa-times-circle"></i>
+									<?php echo $this->session->flashdata('healthproblem_update_fail') ?>
+								</div>
+							<?php endif; ?>
+						</div>
+
+						<div class="col-md-4"></div>
+
 						<div class="col-md-12" style="margin-top: 20px">
 
-								<?php 
-								$attributes = array('id' => 'edithealthproblem', 'method' => 'post', 'name' => 'edithealthproblem');
-								echo form_open_multipart('admin/edithealthproblem', $attributes);
-								?>
+							<?php 
+							$attributes = array('id' => 'edithealthproblem', 'method' => 'post', 'name' => 'edithealthproblem');
+							echo form_open_multipart('admin/edithealthproblem', $attributes);
+							?>
 
-								<div class="control-group">
-									<div class="form-group">
-										<label>Title</label>
-										<input type="text" class="form-control" placeholder="Enter Title" name="name" id="name" value="<?php echo $gethealthproblem->NAME ?>">
-										<input type="hidden" name="id" value="<?php echo $gethealthproblem->ID ?>">
-									</div>
-								</div>
-
-
-								<div class="control-group">
-									<div class="form-group">
-										<label>Slug</label>
-										<input type="text" class="form-control"  name="slug" id="slug" readonly value="<?php echo $gethealthproblem->SLUG ?>">
-									</div>
-								</div>
-
-
-								<div class="control-group">
-									<div class="form-group">
-										<label>Description</label>
-										<textarea name="description"  id="description" class="form-control"><?php echo $gethealthproblem->DESCRIPTION ?></textarea>
-									</div>
-								</div>
-
-
-								<br>
-
+							<div class="control-group">
 								<div class="form-group">
-									<button type="submit" class="btn btn-warning" name="edithealthproblem-btn" id="edithealthproblem-btn"><i class="fa fa-edit"></i> Update</button>
+									<label>Title</label>
+									<input type="text" class="form-control" placeholder="Enter Title" name="name" id="name" value="<?php echo $gethealthproblem->NAME ?>">
+									<input type="hidden" name="id" value="<?php echo $gethealthproblem->ID ?>">
 								</div>
+							</div>
 
-								<?php echo form_close(); ?>
+
+							<div class="control-group">
+								<div class="form-group">
+									<label>Slug</label>
+									<input type="text" class="form-control"  name="slug" id="slug" readonly value="<?php echo $gethealthproblem->SLUG ?>">
+								</div>
+							</div>
+
+
+							<div class="control-group">
+								<div class="form-group">
+									<label>Description</label>
+									<textarea name="description"  id="description" class="form-control"><?php echo $gethealthproblem->DESCRIPTION ?></textarea>
+								</div>
+							</div>
+
+
+							<br>
+
+							<div class="form-group">
+								<button type="submit" class="btn btn-warning" name="edithealthproblem-btn" id="edithealthproblem-btn"><i class="fa fa-edit"></i> Update</button>
+							</div>
+
+							<?php echo form_close(); ?>
 							
 						</div>
 

@@ -27,6 +27,7 @@ class Site extends MX_Controller {
 
 		self::$viewData['user_detail'] = $this->site_model->getUserDetail();
 		self::$viewData['getspecialisttype'] = $this->admin_model->getSpecialistType();
+		self::$viewData['getspecialist'] = $this->admin_model->getspecialist();
 
 	}
 
@@ -150,7 +151,7 @@ class Site extends MX_Controller {
 	{
 		if($this->session->userdata('userid') != ''):
 
-			self::$viewData['title'] = 'Medissist | Conact';
+			self::$viewData['title'] = 'Medissist | Contact';
 			self::$viewData['page'] = 'site/contact';
 			$this->load->view(TEMPPATH, self::$viewData);
 

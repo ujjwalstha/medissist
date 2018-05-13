@@ -7,7 +7,7 @@
 			<small><?php echo $breadcrumb; ?></small>
 		</h1>
 		<ol class="breadcrumb">
-			<li><a href="<?php echo base_url().'admin/dashboard'; ?>"><i class="fa fa-dashboard"></i> Home</a></li>
+			<li><a href="<?php echo base_url().'admin/adminpanel'; ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
 			<li class="active"><?php echo $breadcrumb; ?></li>
 		</ol>
 	</section>
@@ -98,8 +98,12 @@
 										<th>Last Name</th>
 										<th>Email</th>
 										<th>Gender</th>
-										<th>Status</th>  
-										<th>Action</th>
+
+										<?php if($this->session->userdata('admintype') == 1): ?>
+											<th>Status</th>  
+											<th>Action</th>
+										<?php endif; ?>
+										
 									</tr>
 								</thead>
 
@@ -118,6 +122,8 @@
 												<td><?php echo $user->LASTNAME; ?></td>
 												<td><?php echo $user->EMAIL; ?></td>
 												<td><?php echo $user->GENDER; ?></td>
+
+												<?php if($this->session->userdata('admintype') == 1): ?>
 												<td>
 
 													<?php 
@@ -147,6 +153,8 @@
 													</button>
 													<?php echo form_close(); ?>
 												</td>
+												<?php endif; ?>
+
 											</tr>
 
 										<?php endforeach; ?>
