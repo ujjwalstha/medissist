@@ -821,6 +821,8 @@ class Admin extends MX_Controller {
 
 			$id = $this->input->post('id');
 
+			$patientmsg = $this->input->post('patientmsg');
+
 			$data = array(
 				'NAME' 					=>	$this->input->post('name'),
 				'SLUG' 					=>	$this->input->post('slug'),
@@ -829,7 +831,7 @@ class Admin extends MX_Controller {
 				'QUALIFICATION'			=>	$this->input->post('qualification'),
 				'PAST_AFFILIATION'		=>	$this->input->post('pastaffiliation'),
 				'OVERALL_MEMBERSHIP'	=>	$this->input->post('membership'),
-				'PATIENT_MSG'			=>  $this->input->post('patientmsg'),
+				'PATIENT_MSG'			=>  $patientmsg ? $patientmsg : NULL,
 				'UPDATED_DATE'			=>  date('Y-m-d H:i:s'),
 
 			);

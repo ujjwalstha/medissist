@@ -156,8 +156,11 @@ class Site_model extends CI_Model {
 
     public function getspecialistsaying()
     {
-        $where = array('ADMIN_TYPE' => 2, 'STATUS' => 1, 'PATIENT_MSG IS NOT NULL');
-        $result = $this->db->get_where('tbl_admin_detail', $where);
+        // $where = array('ADMIN_TYPE' => 2, 'STATUS' => 1, 'PATIENT_MSG IS NOT NULL');
+        // $result = $this->db->get_where('tbl_admin_detail', $where);
+
+        $sql = "SELECT * FROM tbl_admin_detail WHERE ADMIN_TYPE = 2 AND STATUS = 1 AND PATIENT_MSG IS NOT NULL";
+        $result = $this->db->query($sql);
 
         if ($result->num_rows() > 0) {
             return $result->result();
