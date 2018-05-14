@@ -76,7 +76,7 @@
         <select class="form-control" name="admintype">
           <option disabled selected value="0">--- SELECT TYPE ---</option>
           <option value="1">Super Admin</option>
-          <option value="2">Specialist</option>
+          <option value="2">Health Specialist</option>
         </select>
         
       </div>

@@ -58,7 +58,7 @@
 
 								<li class="menu__item"><a href="<?php echo base_url().'home' ?>" class="menu__link"><span class="menu__helper"><i class="fa fa-home"></i></span></a></li>
 
-								<li class="menu__item"><a href="<?php echo base_url().'medicines' ?>" class="menu__link"><span class="menu__helper">Health Care AND Medicines</span></a></li>
+								<li class="menu__item"><a href="<?php echo base_url().'medicines' ?>" class="menu__link"><span class="menu__helper">USEFUL INFORMATION</span></a></li>
 
 								<li class="menu__item"><a href="<?php echo base_url().'healthspecialist' ?>" class="menu__link"><span class="menu__helper">Health Specialists</span></a></li>
 

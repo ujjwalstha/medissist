@@ -79,7 +79,10 @@
 
 		<div class="panel-group" style=" margin-bottom: 50px;" >
 			<div class="panel panel-info" id="forum-top">
-				<?php foreach($forumques as $question): ?>	
+				<?php 
+				if(is_array($forumques)):
+				foreach($forumques as $question): 
+					?>	
 					<div class="panel-body" style="line-height: 25px;">
 						<div class="col-md-12">
 
@@ -228,6 +231,9 @@
 						<hr class="hr-line-forum" style="height: 5px; background-color: #bce8f1">
 
 					<?php endforeach; ?>
+					<?php else: ?>
+						<h4 style="text-align: center; padding: 15px">No posts available.</h4>
+					<?php endif; ?>
 				</div>
 			</div>
 
